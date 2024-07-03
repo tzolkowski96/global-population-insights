@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Population Growth Policy Brief Presentation</title>
+    <style>
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f9f9f9; 
+            color: #333;
+        }
+        header, footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .slide { 
+            display: none; 
+            padding: 20px; 
+            box-sizing: border-box; 
+            margin: 50px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .slide.active { 
+            display: block; 
+        }
+        .nav { 
+            text-align: center; 
+            margin-top: 20px; 
+        }
+        .nav button { 
+            padding: 10px 20px; 
+            margin: 0 5px; 
+            background-color: #007bff; 
+            color: #fff; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .nav button:hover { 
+            background-color: #0056b3; 
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .progress-bar {
+            height: 5px;
+            background-color: #007bff;
+            width: 0;
+            transition: width 0.4s;
+        }
+        h1, h2, h3 { 
+            color: #333; 
+        }
+        h1 {
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        ul { 
+            list-style-type: disc; 
+            margin: 20px 0; 
+            padding: 0 20px; 
+        }
+        p { 
+            line-height: 1.6; 
+            margin-bottom: 1em;
+        }
+        blockquote {
+            background: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+        }
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+        blockquote p {
+            display: inline;
+        }
+        .highlight {
+            background-color: #ff0;
+        }
+        .divider {
+            border-bottom: 1px solid #ddd;
+            margin: 20px 0;
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Population Growth Policy Brief</h1>
+    </header>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="container">
+        <div id="slide1" class="slide active">
+            <h1>8 Billion Humans on the Planet</h1>
+            <p>By Tobin Zolkowski</p>
+        </div>
+        <div id="slide2" class="slide">
+            <h2>Executive Summary</h2>
+            <p>The globe has reached a crucial point in its growth trajectory due to the rapidly expanding global population. According to the United Nations, the global population will reach <span class="highlight">8 billion</span> by November 15, 2022, and will continue to rise to <span class="highlight">9 billion</span> by the end of the decade. This forecast stems from prior trends. However, it is considered conservative. The world's growing population is putting significant pressure on ecosystems, with the consequences appearing in various ways. As for solving this severe challenge, humanity must devise and put in place ways to limit population increase and redistribute precious resources.</p>
+            <blockquote><p>"The world's growing population is putting significant pressure on ecosystems."</p></blockquote>
+            <p>This policy study examines population estimates from 1960 to 1991 and then again to 2021, emphasizing unique places among the world's most populated countries. The data is presented graphically, and the policy brief finishes with policy suggestions, such as improving women's education and tackling natural resource depletion.</p>
+            <div class="divider"></div>
+        </div>
+        <div id="slide3" class="slide">
+            <h2>Population Projections</h2>
+            <p>According to Pew Research Center demographer Conrad Hackett, the global population will approach <span class="highlight">8 billion</span> by 2023, with a concentration of people living in only a few countries. According to Hackett, the United States, Indonesia, Pakistan, Nigeria, and Brazil will soon be among the most populated countries on the planet. India and China now have the most people, and both are expected to continue increasing. Although China now has a more significant population, researchers predict that owing to China's dropping birth rate, India will surpass China in 2023. The analysis also discovers that the pace of population increase between 1991 and 2021 varies from the rate of growth between 1960 and 1991.</p>
+            <div class="divider"></div>
+        </div>
+        <div id="slide4" class="slide">
+            <h2>Growth Rates per Income Group</h2>
+            <div id="income-group-chart"></div>
+            <p>The bar chart below examines population growth rates across income quintiles from 1960 through 2021 using World Bank data. The data shows that although there are differences in income across demographic groups, overall population increase can be seen in all income brackets. Additionally, the data shows a widening income gap between different groups of people. Middle-income nations' populations grow at a quicker rate than those of either low- or high-income countries.</p>
+            <div class="divider"></div>
+        </div>
+        <div id="slide5" class="slide">
+            <h2>Population Increase by Region</h2>
+            <div id="population-growth-treemap"></div>
+            <p>The treemap below depicts the worldwide distribution of human populations. The population distribution in Sub-Saharan Africa, Latin America and the Caribbean, East Asia and the Pacific, the Middle East and North Africa, Europe and Central Asia, South Asia, and North America is shown. The regions were sorted from highest to lowest growth rate based on the CAGR. Sub-Saharan Africa had the greatest population growth rate, at <span class="highlight">1.201%</span>, while North America had the lowest, at <span class="highlight">0.029%</span>.</p>
+            <div class="divider"></div>
+        </div>
+        <div id="slide6" class="slide">
+            <h2>The World's Ten Most Populous Countries</h2>
+            <div id="population-growth-line-chart"></div>
+            <p>The line chart below presents the population growth of the ten most populated countries across several decades. The population growth rates of China and India are much higher than those of the other eight countries shown in the graph. China's rapid population growth has made it the planet's most populous country. Other countries with substantial populations of people include the Russian Federation, Mexico, Indonesia, Pakistan, Brazil, Nigeria, Bangladesh, and the United States.</p>
+            <div class="divider"></div>
+        </div>
+        <div id="slide7" class="slide">
+            <h2>Recommendations</h2>
+            <p>Equitable educational opportunities for girls and women is a critical issue that must be addressed to control and limit global population growth successfully. According to research, there is a clear relationship between a population's reproduction rate and women's average degree of education (Pradhan, 2015). Increasing the number of young women and girls who finish secondary education might lead to a more manageable population.</p>
+            <p>Apart from providing equal educational opportunities for girls and women, people must also understand the effect of their consuming habits on the earth's natural resources. Individuals who learn to control their emotions and avoid unpleasant consequences will be able to cope with the obstacles presented by shared resources more efficiently. Restricting access to limited resources is one method for promoting less wasteful use.</p>
+            <blockquote><p>"Educating the general people about the hazards of exhausting all of the planet's natural resources has the potential to alleviate the harmful effects of overpopulation."</p></blockquote>
+            <p>The necessity of resource conservation and the need to reduce the overall quantity of goods and services needed must be emphasized. All available resources must be used to convince people to lessen their usage of products made from the earth's limited natural resources.</p>
+            <div class="divider"></div>
+        </div>
+        <div id="slide8" class="slide">
+            <h2>Impact of Population Growth on Resources</h2>
+            <p>Population growth has significant implications for natural resources. Increased demand for food, water, and energy leads to over-exploitation of resources. This slide will delve into the effects of population growth on various resources and suggest strategies to mitigate these effects.</p>
+            <ul>
+                <li><strong>Water Scarcity:</strong> With the rising population, freshwater resources are under immense pressure. Countries need to implement efficient water management practices.</li>
+                <li><strong>Food Security:</strong> Increasing population requires higher food production, which can lead to over-farming and soil degradation. Sustainable agricultural practices are crucial.</li>
+                <li><strong>Energy Demand:</strong> Higher population means increased energy consumption, leading to more fossil fuel use and higher carbon emissions. Transitioning to renewable energy sources is essential.</li>
+            </ul>
+            <div class="divider"></div>
+        </div>
+        <div id="slide9" class="slide">
+            <h2>Case Studies: Successes in Population Control</h2>
+            <p>Examining successful case studies can provide valuable insights into effective population control measures. This slide highlights countries that have implemented successful population policies.</p>
+            <ul>
+                <li><strong>China:</strong> The one-child policy, though controversial, significantly slowed population growth. However, it also led to demographic imbalances that the country is now addressing.</li>
+                <li><strong>India:</strong> Various state-level initiatives focusing on female education and family planning have shown positive results in reducing birth rates.</li>
+                <li><strong>Bangladesh:</strong> Improved access to education and healthcare, along with community-based family planning programs, have helped lower the fertility rate.</li>
+            </ul>
+            <div class="divider"></div>
+        </div>
+        <div id="slide10" class="slide">
+            <h2>Future Projections and Challenges</h2>
+            <p>Looking ahead, the world faces significant challenges in managing population growth. This slide discusses future projections and the hurdles we must overcome.</p>
+            <ul>
+                <li><strong>Urbanization:</strong> As more people move to cities, urban areas must expand infrastructure and services to accommodate the growing population.</li>
+                <li><strong>Aging Population:</strong> Many countries will face challenges related to an aging population, including increased healthcare costs and a shrinking workforce.</li>
+                <li><strong>Climate Change:</strong> Population growth exacerbates climate change impacts. Coordinated global efforts are needed to address environmental sustainability.</li>
+            </ul>
+            <div class="divider"></div>
+        </div>
+        <div id="slide11" class="slide">
+            <h2>References</h2>
+            <ul>
+                <li>Brown, P. M., & Cameron, L. D. (2000). What can be done to reduce overconsumption? Ecological Economics, 32(1), 27–41. <a href="https://doi.org/10.1016/S0921-8009(99)00093-2">https://doi.org/10.1016/S0921-8009(99)00093-2</a></li>
+                <li>United Nations (n.d.). Day of 8 Billion. Retrieved November 28, 2022, from <a href="https://www.un.org/en/dayof8billion">https://www.un.org/en/dayof8billion</a></li>
+                <li>Hackett, C. (2022). Global population projected to exceed 8 billion in 2022; half live in just seven countries. Pew Research Center. Retrieved November 28, 2022, from <a href="https://www.pewresearch.org/fact-tank/2022/07/21/global-population-projected-to-exceed-8-billion-in-2022-half-live-in-just-seven-countries/">https://www.pewresearch.org/fact-tank/2022/07/21/global-population-projected-to-exceed-8-billion-in-2022-half-live-in-just-seven-countries/</a></li>
+                <li>Lutz, W., Sanderson, W., & Scherbov, S. (2001). The end of world population growth. Nature, 412(6846), 543–545. <a href="https://doi.org/10.1038/35087589">https://doi.org/10.1038/35087589</a></li>
+                <li>The World Bank (n.d.). Population, total | data. Retrieved November 24, 2022, from <a href="https://data.worldbank.org/indicator/SP.POP.TOTL?end=2020&start=1960&view=chart">https://data.worldbank.org/indicator/SP.POP.TOTL?end=2020&start=1960&view=chart</a></li>
+                <li>Pradhan, E. (n.d.). Female Education and Childbearing: A Closer Look at the Data. Retrieved November 28, 2022, from <a href="https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data">https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data</a></li>
+                <li>Roser, M., & Rodés-Guirao, L. (2013). Future Population Growth. Our World in Data. <a href="https://ourworldindata.org/future-population-growth">https://ourworldindata.org/future-population-growth</a></li>
+            </ul>
+            <div class="divider"></div>
+        </div>
+        <div id="slide12" class="slide">
+            <h2>Thank You!</h2>
+            <p>Thank you for your attention. If you have any questions or would like to discuss further, please feel free to reach out.</p>
+        </div>
+        <div class="nav">
+            <button onclick="previousSlide()">&#9664; Previous</button>
+            <button onclick="nextSlide()">Next &#9654;</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Tobin Zolkowski. All rights reserved.</p>
+    </footer>
+    <script>
+        let currentSlide = 1;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === n - 1) {
+                    slide.classList.add('active');
+                }
+            });
+            progressBar.style.width = `${(n / slides.length) * 100}%`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide % slides.length) + 1;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 2 + slides.length) % slides.length + 1;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            showSlide(currentSlide);
+
+            // Income Group by Year Bar Chart
+            const incomeData = {
+                x: ['Low income', 'Lower middle income', 'Upper middle income', 'High income'],
+                y: [689325511, 3534305686, 2501472739, 1272685768],
+                name: '2021',
+                type: 'bar',
+                marker: { color: '#1f77b4' }
+            };
+
+            const incomeData1991 = {
+                x: ['Low income', 'Lower middle income', 'Upper middle income', 'High income'],
+                y: [397930235, 2095938637, 1953141255, 1015171541],
+                name: '1991',
+                type: 'bar',
+                marker: { color: '#ff7f0e' }
+            };
+
+            const incomeData1960 = {
+                x: ['Low income', 'Lower middle income', 'Upper middle income', 'High income'],
+                y: [140851836, 998620901, 1115211252, 786152039],
+                name: '1960',
+                type: 'bar',
+                marker: { color: '#2ca02c' }
+            };
+
+            const incomeLayout = {
+                barmode: 'group',
+                title: 'Income Group by Year'
+            };
+
+            Plotly.newPlot('income-group-chart', [incomeData, incomeData1991, incomeData1960], incomeLayout);
+
+            // Global Population Growth Rate per Region Treemap
+            const treemapData = [{
+                type: "treemap",
+                labels: ["Sub-Saharan Africa", "East Asia & Pacific", "Middle East & North Africa", "Latin America & Caribbean", "Europe & Central Asia", "South Asia", "North America"],
+                parents: ["", "", "", "", "", "", ""],
+                values: [1.201, 0.658, 0.656, 0.704, 0.415, 0.173, 0.029],
+                textinfo: "label+value",
+                outsidetextfont: { size: 20, color: "#377eb8" },
+                marker: { line: { width: 2 } }
+            }];
+
+            const treemapLayout = {
+                title: "Global Population Growth Rate per Region"
+            };
+
+            Plotly.newPlot('population-growth-treemap', treemapData, treemapLayout);
+
+            // Countries with the Biggest Population Line Chart
+            const populationData = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [667070000, 818315000, 981235000, 1135185000, 1262645000, 1344130000, 1444216107],
+                mode: 'lines+markers',
+                name: 'China',
+                line: { color: '#1f77b4' }
+            };
+
+            const populationDataIndia = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [449480608, 555189792, 697956926, 870133480, 1059633677, 1234281170, 1380004385],
+                mode: 'lines+markers',
+                name: 'India',
+                line: { color: '#ff7f0e' }
+            };
+
+            const populationDataUSA = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [180671000, 205052000, 227225000, 249623000, 282162411, 309349689, 331002647],
+                mode: 'lines+markers',
+                name: 'USA',
+                line: { color: '#2ca02c' }
+            };
+
+            const populationDataIndonesia = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [87736352, 116235000, 147490000, 179378000, 211540429, 241834215, 273523621],
+                mode: 'lines+markers',
+                name: 'Indonesia',
+                line: { color: '#d62728' }
+            };
+
+            const populationDataPakistan = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [45886000, 60446000, 81357000, 108655000, 138085000, 170043000, 220892331],
+                mode: 'lines+markers',
+                name: 'Pakistan',
+                line: { color: '#9467bd' }
+            };
+
+            const populationDataBrazil = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [72211000, 95347000, 121149000, 149003225, 174790340, 194946470, 212559409],
+                mode: 'lines+markers',
+                name: 'Brazil',
+                line: { color: '#8c564b' }
+            };
+
+            const populationDataNigeria = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [45103000, 57428000, 73354000, 94860000, 122352000, 159708000, 206139587],
+                mode: 'lines+markers',
+                name: 'Nigeria',
+                line: { color: '#e377c2' }
+            };
+
+            const populationDataBangladesh = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [50181900, 65836000, 79704000, 104663000, 130193000, 148692131, 164689383],
+                mode: 'lines+markers',
+                name: 'Bangladesh',
+                line: { color: '#7f7f7f' }
+            };
+
+            const populationDataRussia = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [119897000, 130000000, 138082178, 148287000, 146404000, 142849449, 145912025],
+                mode: 'lines+markers',
+                name: 'Russia',
+                line: { color: '#bcbd22' }
+            };
+
+            const populationDataMexico = {
+                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+                y: [36996500, 50950000, 70145000, 88178000, 103263388, 115243000, 128932753],
+                mode: 'lines+markers',
+                name: 'Mexico',
+                line: { color: '#17becf' }
+            };
+
+            const populationLayout = {
+                title: 'Countries with the Biggest Population',
+                xaxis: {
+                    title: 'Year'
+                },
+                yaxis: {
+                    title: 'Population'
+                }
+            };
+
+            Plotly.newPlot('population-growth-line-chart', [
+                populationData,
+                populationDataIndia,
+                populationDataUSA,
+                populationDataIndonesia,
+                populationDataPakistan,
+                populationDataBrazil,
+                populationDataNigeria,
+                populationDataBangladesh,
+                populationDataRussia,
+                populationDataMexico
+            ], populationLayout);
+        });
+    </script>
+</body>
+</html>
