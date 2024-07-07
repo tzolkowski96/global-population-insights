@@ -23,7 +23,6 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            padding-top: 70px; /* Adjusted for progress bar positioning */
         }
         .slide { 
             display: none; 
@@ -139,6 +138,43 @@
         .divider {
             border-bottom: 1px solid #ddd;
             margin: 20px 0;
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 768px) {
+            header, footer {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+            .progress-titles {
+                font-size: 10px;
+                padding: 0 5px;
+                flex-wrap: wrap;
+            }
+            .progress-titles span {
+                padding: 5px 0;
+            }
+            .nav button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-container {
+                position: relative;
+            }
+            .progress-titles {
+                display: block;
+                text-align: center;
+            }
+            .progress-titles span {
+                display: inline-block;
+                margin: 5px 2px;
+            }
         }
     </style>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
