@@ -1,581 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/Article">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Population Growth Policy Brief Presentation</title>
-    <style>
-        body { 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #f9f9f9; 
-            color: #333;
-        }
-        header, footer {
-            background-color: #007bff;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .slide { 
-            display: none; 
-            padding: 20px; 
-            box-sizing: border-box; 
-            margin: 50px 0;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .slide.active { 
-            display: block; 
-        }
-        .nav { 
-            text-align: center; 
-            margin-top: 20px; 
-        }
-        .nav button { 
-            padding: 15px 30px; 
-            margin: 0 10px; 
-            background-color: #007bff; 
-            color: #fff; 
-            border: none; 
-            border-radius: 4px; 
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 16px;
-        }
-        .nav button:hover, .nav button:focus { 
-            background-color: #0056b3; 
-            outline: none;
-        }
-        .progress-container {
-            width: 100%;
-            background-color: #f3f3f3;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-        .progress-bar {
-            height: 5px;
-            background-color: #007bff;
-            width: 0;
-            transition: width 0.4s;
-        }
-        .progress-titles {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #666;
-            padding: 0 10px;
-            margin-top: 5px;
-        }
-        .progress-titles span {
-            flex-grow: 1;
-            text-align: center;
-            position: relative;
-            cursor: pointer;
-        }
-        .progress-titles span.active {
-            font-weight: bold;
-            color: #007bff;
-        }
-        .progress-titles span.active::after {
-            content: '';
-            display: block;
-            margin: 0 auto;
-            width: 10%;
-            padding-top: 5px;
-            border-bottom: 2px solid #007bff;
-        }
-        h1, h2, h3 { 
-            color: #333; 
-        }
-        h1 {
-            margin-bottom: 0.5em;
-        }
-        h2 {
-            margin-top: 1em;
-            margin-bottom: 0.5em;
-        }
-        ul { 
-            list-style-type: disc; 
-            margin: 20px 0; 
-            padding: 0 20px; 
-        }
-        p { 
-            line-height: 1.6; 
-            margin-bottom: 1em;
-        }
-        blockquote {
-            background: #f9f9f9;
-            border-left: 10px solid #ccc;
-            margin: 1.5em 10px;
-            padding: 0.5em 10px;
-            quotes: "\201C""\201D""\2018""\2019";
-        }
-        blockquote:before {
-            color: #ccc;
-            content: open-quote;
-            font-size: 4em;
-            line-height: 0.1em;
-            margin-right: 0.25em;
-            vertical-align: -0.4em;
-        }
-        blockquote p {
-            display: inline;
-        }
-        .highlight {
-            background-color: #ff0;
-        }
-        .divider {
-            border-bottom: 1px solid #ddd;
-            margin: 20px 0;
-        }
+    <title itemprop="name headline">Global Population Insights: A Policy Brief</title>
+    <meta name="description" content="Explore global population growth with interactive data, projections, impacts, and policy recommendations in this slideshow.">
+    <meta name="keywords" content="population growth, data visualization, policy brief, global trends, demography, interactive presentation, Tobin Zolkowski">
+    <meta name="author" content="Tobin Zolkowski">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Global Population Insights: A Policy Brief Showcase">
+    <meta property="og:description" content="Discover interactive data visualizations and analysis on global population trends, projections, and policy ideas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tzolkowski96.github.io/global-population-insights/">
+    <meta property="og:image" content="https://tzolkowski96.github.io/global-population-insights/preview-image.svg">
 
-        /* Adjustments for smaller screens */
-        @media (max-width: 768px) {
-            header, footer {
-                padding: 15px 10px;
-                font-size: 14px;
-            }
-            .progress-titles {
-                font-size: 10px;
-                padding: 0 5px;
-                flex-wrap: wrap;
-            }
-            .progress-titles span {
-                padding: 5px 0;
-            }
-            .nav button {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-            .container {
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .progress-container {
-                position: relative;
-            }
-            .progress-titles {
-                display: block;
-                text-align: center;
-            }
-            .progress-titles span {
-                display: inline-block;
-                margin: 5px 2px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link itemprop="mainEntityOfPage" href="https://tzolkowski96.github.io/global-population-insights/">
+    <meta itemprop="datePublished" content="2022-11-15">
+    <meta itemprop="dateModified" content="2025-05-06">
+    <meta itemprop="image" content="https://tzolkowski96.github.io/global-population-insights/preview-image.svg">
 </head>
-<body>
-    <header>
-        <h1>Population Growth Policy Brief</h1>
-    </header>
-    <div class="progress-container" aria-label="Progress bar">
-        <div class="progress-bar" id="progress-bar"></div>
-        <div class="progress-titles" id="progress-titles">
-            <span id="title1" onclick="jumpToSlide(1)" class="active" aria-label="Introduction">Introduction</span>
-            <span id="title2" onclick="jumpToSlide(2)" aria-label="Summary">Summary</span>
-            <span id="title3" onclick="jumpToSlide(3)" aria-label="Projections">Projections</span>
-            <span id="title4" onclick="jumpToSlide(4)" aria-label="Income Groups">Income Groups</span>
-            <span id="title5" onclick="jumpToSlide(5)" aria-label="Regions">Regions</span>
-            <span id="title6" onclick="jumpToSlide(6)" aria-label="Countries">Countries</span>
-            <span id="title7" onclick="jumpToSlide(7)" aria-label="Recommendations">Recommendations</span>
-            <span id="title8" onclick="jumpToSlide(8)" aria-label="Resources">Resources</span>
-            <span id="title9" onclick="jumpToSlide(9)" aria-label="Case Studies">Case Studies</span>
-            <span id="title10" onclick="jumpToSlide(10)" aria-label="Challenges">Challenges</span>
-            <span id="title11" onclick="jumpToSlide(11)" aria-label="References">References</span>
-            <span id="title12" onclick="jumpToSlide(12)" aria-label="Conclusion">Conclusion</span>
-            <span id="title13" onclick="jumpToSlide(13)" aria-label="Technologies">Technologies</span>
+<body itemprop="articleBody">
+    <aside class="sidebar-navigation" aria-label="Slideshow navigation">
+        <div id="progress-titles" class="vertical-navigation-bar" role="navigation" aria-label="Slideshow Navigation">
+            <button id="title1" onclick="jumpToSlide(1)" class="active" aria-label="Introduction">Introduction</button>
+            <button id="title2" onclick="jumpToSlide(2)" aria-label="Summary">Summary</button>
+            <button id="title3" onclick="jumpToSlide(3)" aria-label="Projections">Projections</button>
+            <button id="title4" onclick="jumpToSlide(4)" aria-label="Income Groups">Income Groups</button>
+            <button id="title5" onclick="jumpToSlide(5)" aria-label="Regions">Regions</button>
+            <button id="title6" onclick="jumpToSlide(6)" aria-label="Countries">Countries</button>
+            <button id="title7" onclick="jumpToSlide(7)" aria-label="Recommendations">Recommendations</button>
+            <button id="title8" onclick="jumpToSlide(8)" aria-label="Resources">Resources</button>
+            <button id="title9" onclick="jumpToSlide(9)" aria-label="Case Studies">Case Studies</button>
+            <button id="title10" onclick="jumpToSlide(10)" aria-label="Challenges">Challenges</button>
+            <button id="title11" onclick="jumpToSlide(11)" aria-label="References">References</button>
+            <button id="title12" onclick="jumpToSlide(12)" aria-label="Conclusion">Conclusion</button>
+            <button id="title13" onclick="jumpToSlide(13)" aria-label="Technologies">Technologies</button>
+            <button id="title14" onclick="jumpToSlide(14)" aria-label="Thank You">Thank You</button>
         </div>
-    </div>
-    <div class="container">
-        <section id="slide1" class="slide active" aria-labelledby="title1">
-            <h1>8 Billion Humans on the Planet</h1>
-            <p>By Tobin Zolkowski</p>
-            <p>This project was completed for the LIS707 Data Visualization & Communication for Decision Making Fall 2022 course as part of the University of Wisconsin-Madison MS Information program.</p>
-        </section>
-        <section id="slide2" class="slide" aria-labelledby="title2">
-            <h2>Executive Summary</h2>
-            <p>The globe has reached a crucial point in its growth trajectory due to the rapidly expanding global population. According to the United Nations, the global population reached <span class="highlight">8 billion</span> by November 15, 2022, and will continue to rise to <span class="highlight">9 billion</span> by the end of the decade. This forecast stems from prior trends. However, it is considered conservative. The world's growing population is putting significant pressure on ecosystems, with the consequences appearing in various ways. As for solving this severe challenge, humanity must devise and put in place ways to limit population increase and redistribute precious resources.</p>
-            <blockquote><p>"The world's growing population is putting significant pressure on ecosystems."</p></blockquote>
-            <p>This policy study examines population estimates from 1960 to 1991 and then again to 2021, emphasizing unique places among the world's most populated countries. The data is presented graphically, and the policy brief finishes with policy suggestions, such as improving women's education and tackling natural resource depletion.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide3" class="slide" aria-labelledby="title3">
-            <h2>Population Projections</h2>
-            <p>According to Pew Research Center demographer Conrad Hackett, the global population will approach <span class="highlight">8 billion</span> by 2023, with a concentration of people living in only a few countries. According to Hackett, the United States, Indonesia, Pakistan, Nigeria, and Brazil will soon be among the most populated countries on the planet. India and China now have the most people, and both are expected to continue increasing. Although China now has a more significant population, researchers predict that owing to China's dropping birth rate, India will surpass China in 2023. The analysis also discovers that the pace of population increase between 1991 and 2021 varied from the rate of growth between 1960 and 1991.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide4" class="slide" aria-labelledby="title4">
-            <h2>Growth Rates per Income Group</h2>
-            <div id="income-group-chart" aria-label="Population Growth Rates by Income Group Chart"></div>
-            <p>The bar chart above examines population growth rates across income quintiles from 1960 through 2021 using World Bank data. The data shows that although there are differences in income across demographic groups, overall population increase can be seen in all income brackets. Additionally, the data shows a widening income gap between different groups of people. Middle-income nations' populations grow at a quicker rate than those of either low- or high-income countries.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide5" class="slide" aria-labelledby="title5">
-            <h2>Population Increase by Region</h2>
-            <div id="population-growth-treemap" aria-label="Global Population Growth Rate by Region Treemap"></div>
-            <p>The treemap above depicts the worldwide distribution of human populations. The population distribution in Sub-Saharan Africa, Latin America and the Caribbean, East Asia and the Pacific, the Middle East and North Africa, Europe and Central Asia, South Asia, and North America is shown. The regions were sorted from highest to lowest growth rate based on the CAGR. Sub-Saharan Africa had the greatest population growth rate, at <span class="highlight">1.201%</span>, while North America had the lowest, at <span class="highlight">0.029%</span>.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide6" class="slide" aria-labelledby="title6">
-            <h2>The World's Ten Most Populous Countries</h2>
-            <div id="population-growth-line-chart" aria-label="Population Growth Line Chart"></div>
-            <div>
-                <label for="country-filter">Filter by Country:</label>
-                <select id="country-filter" aria-controls="population-growth-line-chart">
-                    <option value="all">All</option>
-                    <option value="China">China</option>
-                    <option value="India">India</option>
-                    <option value="USA">USA</option>
-                    <option value="Indonesia">Indonesia</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="Brazil">Brazil</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="Bangladesh">Bangladesh</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Mexico">Mexico</option>
-                </select>
+    </aside>
+    <div class="main-content">
+        <header>
+            <h1 itemprop="headline">Population Growth: A Global Policy Brief</h1>
+            <div itemprop="author" itemscope itemtype="https://schema.org/Person" style="display:none;">
+                <meta itemprop="name" content="Tobin Zolkowski">
             </div>
-            <p>The line chart above presents the population growth of the ten most populated countries across several decades. The population growth rates of China and India are much higher than those of the other eight countries shown in the graph. China's rapid population growth has made it the planet's most populous country. Other countries with substantial populations of people include the Russian Federation, Mexico, Indonesia, Pakistan, Brazil, Nigeria, Bangladesh, and the United States.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide7" class="slide" aria-labelledby="title7">
-            <h2>Recommendations</h2>
-            <p>Equitable educational opportunities for girls and women is a critical issue that must be addressed to control and limit global population growth successfully. According to research, there is a clear relationship between a population's reproduction rate and women's average degree of education (Pradhan, 2015). Increasing the number of young women and girls who finish secondary education might lead to a more manageable population.</p>
-            <p>Apart from providing equal educational opportunities for girls and women, people must also understand the effect of their consuming habits on the earth's natural resources. Individuals who learn to control their emotions and avoid unpleasant consequences will be able to cope with the obstacles presented by shared resources more efficiently. Restricting access to limited resources is one method for promoting less wasteful use.</p>
-            <blockquote><p>"Educating the general people about the hazards of exhausting all of the planet's natural resources has the potential to alleviate the harmful effects of overpopulation."</p></blockquote>
-            <p>The necessity of resource conservation and the need to reduce the overall quantity of goods and services needed must be emphasized. All available resources must be used to convince people to lessen their usage of products made from the earth's limited natural resources.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide8" class="slide" aria-labelledby="title8">
-            <h2>Impact of Population Growth on Resources</h2>
-            <p>Population growth has significant implications for natural resources. Increased demand for food, water, and energy leads to over-exploitation of resources. This slide will delve into the effects of population growth on various resources and suggest strategies to mitigate these effects.</p>
-            <ul>
-                <li><strong>Water Scarcity:</strong> With the rising population, freshwater resources are under immense pressure. Countries need to implement efficient water management practices.</li>
-                <li><strong>Food Security:</strong> Increasing population requires higher food production, which can lead to over-farming and soil degradation. Sustainable agricultural practices are crucial.</li>
-                <li><strong>Energy Demand:</strong> Higher population means increased energy consumption, leading to more fossil fuel use and higher carbon emissions. Transitioning to renewable energy sources is essential.</li>
-            </ul>
-            <p>One notable example is Singapore's approach to water management. Despite limited natural water resources, Singapore has implemented advanced water recycling and desalination technologies to ensure a sustainable water supply.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide9" class="slide" aria-labelledby="title9">
-            <h2>Case Studies: Successes in Population Control</h2>
-            <p>Examining successful case studies can provide valuable insights into effective population control measures. This slide highlights countries that have implemented successful population policies.</p>
-            <ul>
-                <li><strong>China:</strong> The one-child policy, though controversial, significantly slowed population growth. However, it also led to demographic imbalances that the country is now addressing.</li>
-                <li><strong>India:</strong> Various state-level initiatives focusing on female education and family planning have shown positive results in reducing birth rates.</li>
-                <li><strong>Bangladesh:</strong> Improved access to education and healthcare, along with community-based family planning programs, have helped lower the fertility rate.</li>
-            </ul>
-            <p>For example, in Bangladesh, community-based family planning programs have educated women on the importance of family planning, leading to a significant decrease in fertility rates over the past few decades.</p>
-            <blockquote><p>"The success of Bangladesh in lowering its fertility rate can be largely attributed to its community-based family planning initiatives."</p></blockquote>
-            <p>In addition to these countries, Rwanda has also made significant strides in population control through a combination of policies promoting family planning, gender equality, and economic development.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide10" class="slide" aria-labelledby="title10">
-            <h2>Future Projections and Challenges</h2>
-            <p>Looking ahead, the world faces significant challenges in managing population growth. This slide discusses future projections and the hurdles we must overcome.</p>
-            <ul>
-                <li><strong>Urbanization:</strong> As more people move to cities, urban areas must expand infrastructure and services to accommodate the growing population.</li>
-                <li><strong>Aging Population:</strong> Many countries will face challenges related to an aging population, including increased healthcare costs and a shrinking workforce.</li>
-                <li><strong>Climate Change:</strong> Population growth exacerbates climate change impacts. Coordinated global efforts are needed to address environmental sustainability.</li>
-            </ul>
-            <p>For instance, Tokyo, Japan, is an example of a megacity facing challenges of urbanization and an aging population. The city has been working on solutions such as promoting compact urban development and improving healthcare services for the elderly.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide11" class="slide" aria-labelledby="title11">
-            <h2>References</h2>
-            <ul>
-                <li>Brown, P. M., & Cameron, L. D. (2000). What can be done to reduce overconsumption? Ecological Economics, 32(1), 27–41. <a href="https://doi.org/10.1016/S0921-8009(99)00093-2">https://doi.org/10.1016/S0921-8009(99)00093-2</a></li>
-                <li>United Nations (n.d.). Day of 8 Billion. Retrieved November 28, 2022, from <a href="https://www.un.org/en/dayof8billion">https://www.un.org/en/dayof8billion</a></li>
-                <li>Hackett, C. (2022). Global population projected to exceed 8 billion in 2022; half live in just seven countries. Pew Research Center. Retrieved November 28, 2022, from <a href="https://www.pewresearch.org/fact-tank/2022/07/21/global-population-projected-to-exceed-8-billion-in-2022-half-live-in-just-seven-countries/">https://www.pewresearch.org/fact-tank/2022/07/21/global-population-projected-to-exceed-8-billion-in-2022-half-live-in-just-seven-countries/</a></li>
-                <li>Lutz, W., Sanderson, W., & Scherbov, S. (2001). The end of world population growth. Nature, 412(6846), 543–545. <a href="https://doi.org/10.1038/35087589">https://doi.org/10.1038/35087589</a></li>
-                <li>The World Bank (n.d.). Population, total | data. Retrieved November 24, 2022, from <a href="https://data.worldbank.org/indicator/SP.POP.TOTL?end=2020&start=1960&view=chart">https://data.worldbank.org/indicator/SP.POP.TOTL?end=2020&start=1960&view=chart</a></li>
-                <li>Pradhan, E. (n.d.). Female Education and Childbearing: A Closer Look at the Data. Retrieved November 28, 2022, from <a href="https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data">https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data</a></li>
-                <li>Roser, M., & Rodés-Guirao, L. (2013). Future Population Growth. Our World in Data. <a href="https://ourworldindata.org/future-population-growth">https://ourworldindata.org/future-population-growth</a></li>
-            </ul>
-            <div class="divider"></div>
-        </section>
-        <section id="slide12" class="slide" aria-labelledby="title12">
-            <h2>Conclusion</h2>
-            <p>The challenge of managing population growth is complex and multifaceted. By addressing key factors such as education, resource management, and sustainable development, we can work towards a balanced and equitable future. The insights and recommendations presented in this brief highlight the importance of proactive policies and global cooperation in tackling these issues.</p>
-            <div class="divider"></div>
-        </section>
-        <section id="slide13" class="slide" aria-labelledby="title13">
-            <h2>Technologies and Methodologies</h2>
-            <p>This project utilized various technologies and methodologies to ensure accurate and effective data presentation:</p>
-            <ul>
-                <li><strong>HTML, CSS, and JavaScript:</strong> For structuring, styling, and adding interactive elements to the presentation.</li>
-                <li><strong>Plotly:</strong> For creating interactive and visually appealing data visualizations.</li>
-                <li><strong>Tableau:</strong> For initial data analysis and visualization before integrating into the web presentation.</li>
-                <li><strong>Pandas and Seaborn:</strong> For data manipulation and creating static visualizations.</li>
-                <li><strong>World Bank and United Nations Data:</strong> Primary data sources for population statistics.</li>
-            </ul>
-            <div class="divider"></div>
-        </section>
-        <section id="slide14" class="slide" aria-labelledby="title14">
-            <h2>Thank You!</h2>
-            <p>Thank you for your attention. If you have any questions or would like to discuss further, please feel free to reach out.</p>
-        </section>
-        <div class="nav">
-            <button onclick="previousSlide()">&#9664; Previous</button>
-            <button onclick="nextSlide()">Next &#9654;</button>
-        </div>
+        </header>
+        <main class="container" role="main">
+            <section id="slide1" class="slide active" aria-labelledby="title1">
+                <h1>Our World at 8 Billion: A Pivotal Moment</h1>
+                <p>By <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Tobin Zolkowski</span></span></p>
+                <p>Hello and welcome! I'm Tobin Zolkowski, and I'm excited to guide you through one of the biggest stories of our time: the growth of our global family. This interactive exploration started as a project for my LIS707 Data Visualization & Communication course back in Fall 2022, during my MS Information program at the University of Wisconsin-Madison. It's since grown into a deeper dive, inviting you to explore the fascinating, complex, and truly critical story of global population growth. Let's uncover the trends, understand the impacts, and think about the future we're all shaping together.</p>
+            </section>
+            <section id="slide2" class="slide" aria-labelledby="title2">
+                <h2>A Snapshot of Our Ever-Expanding World</h2>
+                <p>Picture our amazing planet, buzzing with life, as it navigates a truly remarkable chapter in its demographic story. On November 15, 2022 – a date for the history books – the United Nations announced our global population had hit <span class="highlight">8 billion</span>. This isn't just a number; it's a sign of a huge, accelerating shift affecting everything from our food and air to the societies we build. Looking ahead, projections suggest we might reach <span class="highlight">9 billion</span> people before this decade is out, and some think that's a conservative guess, given current trends! This rapid expansion naturally puts more pressure on our planet's resources and delicate ecosystems. It's a complex challenge, calling for smart solutions and a shared commitment to sustainable living. But it's also an opportunity for human ingenuity and a more conscious way of caring for our collective home.</p>
+                <blockquote><p>“The delicate balance between our growing global family and Earth's finite resources urgently calls for careful planning, forward-thinking policies, and fair strategies for everyone.”</p></blockquote>
+                <p>This policy brief is your guide to understanding population data. We'll journey back in time, looking at trends from 1960 to 1991, and then compare them with the more recent era of 1991 to 2021. We'll also shine a spotlight on the most populous nations, exploring the human stories and societal currents behind the raw numbers—all brought to life with clear, engaging, and interactive visualizations. Our aim is more than just presenting data; we hope to spark meaningful conversations about crucial policy ideas, like advancing education for women and girls worldwide and promoting sustainable resource use for generations to come.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide3" class="slide" aria-labelledby="title3">
+                <h2>Peeking into Our Demographic Future: What Lies Ahead?</h2>
+                <p>So, what does the future hold for our global population? Conrad Hackett, a demographer at Pew Research Center, painted a vivid picture: our world likely surpassed <span class="highlight">8 billion</span> around 2023. A striking fact is that a large chunk of humanity lives in just a few countries. Think of the United States, Indonesia, Pakistan, Nigeria, and Brazil – all major players in population numbers. For a long time, China and India have led the global count, and they're expected to keep growing, though with some changes. Interestingly, while China has historically been the most populous, shifts in birth rates and policies mean India was projected to take that top spot in 2023. This isn't just a list reordering; it reflects deep societal changes, evolving families, and economic developments with big implications for global resources, geopolitics, and cultural exchange. Plus, looking at historical data, we see that population growth hasn't been constant. It showed different patterns from 1960-1991 compared to 1991-2021, hinting at how things like healthcare, education, and socio-economic shifts shape our collective journey.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide4" class="slide" aria-labelledby="title4">
+                <h2>Population Dynamics Across Income Levels</h2>
+                <div id="income-group-chart" class="chart-container-loading" aria-label="Bar chart showing Population Growth Rates by Income Group (CAGR %)"></div>
+                <p>Let's explore how economic standing and population trends connect. The bar chart above, using World Bank data, clearly shows how population growth has varied across income groups from 1960 to 2021. It's clear that while population growth affects everyone, its pace differs. One key takeaway is that middle-income nations, as a group, have generally seen faster population growth than low- or high-income countries. This isn't just a statistic; it hints at complex socio-economic stories. Factors like access to healthcare, education quality, economic dynamism, and family planning resources all play a role. Understanding these nuances is vital for crafting effective policies tailored to the unique needs and potentials of diverse populations.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide5" class="slide" aria-labelledby="title5">
+                <h2>A Regional Tapestry: Population Shifts Across Continents</h2>
+                <div id="population-growth-treemap" class="chart-container-loading" aria-label="Treemap visualizing Global Population Distribution and Regional Growth Focus by population numbers"></div>
+                <p>Now, let's zoom out and look at continents with the treemap above. This visualization details how populations are distributed and how they're growing and shifting across the globe. We use a metric called Compound Annual Growth Rate (CAGR) to understand these changes – it tells us the average yearly growth over a period. For example, Sub-Saharan Africa saw the most significant expansion, with the highest population growth rate at <span class="highlight">1.201%</span> annually between 1960 and 2021. This vibrant growth indicates youthful populations and evolving societies. In contrast, North America's growth was more modest, at <span class="highlight">0.029%</span> during the same period. These varying rates have big implications for regional development, influencing urban planning, infrastructure needs, resource allocation, and environmental stewardship on all scales.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide6" class="slide" aria-labelledby="title6">
+                <h2>Spotlight on Population Giants: A Closer Look</h2>
+                <div id="population-growth-line-chart" class="chart-container-loading" aria-label="Interactive line chart displaying Population Growth of Top 10 Countries, filterable by country"></div>
+                <div>
+                    <label for="country-filter">Explore Nations' Journeys:</label>
+                    <select id="country-filter" aria-controls="population-growth-line-chart">
+                        <option value="all">Show All Giants</option>
+                        <option value="China">China</option>
+                        <option value="India">India</option>
+                        <option value="USA">United States</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Russia">Russian Federation</option>
+                        <option value="Mexico">Mexico</option>
+                    </select>
+                </div>
+                <p>The line chart before you isn't just lines; it's a dynamic story of the world's ten most populous countries over decades. You can quickly see how rapidly China and India's populations have surged, outpacing the other eight nations. For much of recent history, China held the top spot. But these numbers represent more than statistics; they're about countless lives, diverse cultures, and the unique demographic tapestries of these influential nations. Beyond these two giants, countries like the Russian Federation, Mexico, Indonesia, Pakistan, Brazil, Nigeria, Bangladesh, and the United States also house substantial global populations. Each faces distinct opportunities and challenges, shaped by its demographic profile and its place in the larger human story.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide7" class="slide" aria-labelledby="title7">
+                <h2>Pathways to a Balanced Future: Key Recommendations</h2>
+                <p>Wisely navigating global population dynamics is a shared human endeavor. A balanced future relies on two main pillars: empowering people with knowledge and agency, and fostering practices for our planet's long-term sustainability. A cornerstone is ensuring <span class="highlight">equitable education for all girls and women</span> globally. This isn't just social justice; it's a powerful catalyst for demographic stability. Research, like Pradhan's (2015) from the World Bank, clearly shows a strong link between women's education and fertility rates. When girls stay in school longer, it often leads to later marriages, better access to family planning info, and more agency in decisions about their lives and families. These individual empowerments contribute to more sustainable population patterns.</p>
+                <p>Beyond education, understanding our <span class="highlight">collective consumption patterns and their impact on Earth’s finite resources</span> is crucial. We need to encourage mindful consumption and develop strategies for equitable resource distribution. This isn't about drastic restrictions but championing smart, sustainable choices at all levels. For instance, rethinking how we use and share resources can reduce waste, lessen our ecological footprint, and ensure resources remain for future generations.</p>
+                <blockquote><p>“Empowering communities with knowledge about sustainable living, and a deep appreciation for preserving our planet’s natural wealth, can pave the way for a more resilient, equitable, and harmonious world.”</p></blockquote>
+                <p>Furthermore, a strong emphasis on <span class="highlight">comprehensive resource conservation</span> and reducing our ecological footprint is vital. This requires a multi-pronged approach: raising public awareness, promoting sustainable technologies, and supporting policies for responsible resource use. Every effort towards sustainable consumption contributes to a larger positive change for our planet and its people.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide8" class="slide" aria-labelledby="title8">
+                <h2>The Interconnected Web: Population Growth and Our Natural World</h2>
+                <p>It's simple: a growing global family means increased demand for essentials – food, water, and energy. If not managed carefully, this can lead to over-extraction and depletion of natural resources, straining ecosystems. This section explores these critical connections and highlights the importance of proactive strategies.</p>
+                <ul>
+                    <li><strong>Water for All: A Precious, Scarce Resource:</strong> Freshwater is finite. As populations and cities grow, demand for water intensifies, leading to scarcity in many regions. Smart water management, investment in efficient technologies, and promoting water conservation are vital for water security.</li>
+                    <li><strong>Nourishing the World Sustainably: The Future of Food:</strong> More people mean more food needed, but sustainably. Current farming practices can degrade the environment. We must embrace sustainable agriculture (like agroecology), reduce food waste, and support resilient local food systems.</li>
+                    <li><strong>Powering Our Future: The Clean Energy Imperative:</strong> Energy needs expand with population growth. Reliance on fossil fuels drives climate change and pollution. A decisive shift to renewable energy (solar, wind, geothermal) is essential for a cleaner future.</li>
+                    <li><strong>Protecting Biodiversity: Safeguarding Life's Richness:</strong> Human expansion can lead to habitat loss, driving the biodiversity crisis. Biodiversity is crucial for ecosystem health and services like pollination and clean water. Robust conservation, protected areas, and sustainable land-use planning are critical.</li>
+                </ul>
+                <p>Consider Singapore's innovative water management. Facing limited freshwater, they invested in water recycling (NEWater) and desalination, becoming a global leader. This shows how visionary policy, technology, and public education can create a sustainable water supply, offering lessons worldwide.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide9" class="slide" aria-labelledby="title9">
+                <h2>Learning from Global Experiences: Success Stories in Sustainable Population Management</h2>
+                <p>Looking at how different countries have approached their population dynamics offers valuable lessons. This isn't about "population control," but creating conditions where people can make informed choices about family size, balancing national development with environmental health. Here are a few examples:</p>
+                <ul>
+                    <li><strong>China: A Complex Transition:</strong> The one-child policy slowed population growth but led to demographic imbalances like an aging population and skewed gender ratios. China is now addressing these with new policies.</li>
+                    <li><strong>India: States Leading the Way:</strong> Various states in India have seen positive results by focusing on female education, family planning access, and women's empowerment, leading to voluntary reductions in birth rates.</li>
+                    <li><strong>Bangladesh: A Beacon of Progress:</strong> This nation made remarkable progress in lowering its fertility rate through improved education (especially for girls), better healthcare, and effective community-based family planning programs.</li>
+                    <li><strong>Rwanda: Rebuilding and Planning:</strong> Post-conflict, Rwanda integrated family planning into its healthcare, emphasized gender equality, and focused on economic development, helping create conditions for smaller family sizes as a voluntary choice.</li>
+                </ul>
+                <p>Bangladesh's story is particularly inspiring. Community health workers, many local women, brought family planning info and services directly to people, overcoming barriers and leading to a significant, voluntary decline in fertility rates.</p>
+                <blockquote><p>“Bangladesh’s journey shows how community engagement, better health and education, and empowering individuals, especially women, can lead to positive demographic shifts.”</p></blockquote>
+                <p>These examples highlight the importance of context-specific, voluntary, rights-based approaches to population and development, prioritizing health, education, and empowerment.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide10" class="slide" aria-labelledby="title10">
+                <h2>Navigating the Path Ahead: Future Trends and Shared Challenges</h2>
+                <p>Our global community is at a juncture of demographic shifts and interconnected challenges. Understanding these trends is key to building resilient, equitable, and sustainable societies. Let's explore some defining currents:</p>
+                <ul>
+                    <li><strong>The Rise of Cities (Urbanization):</strong> More people are moving to urban centers, bringing talent and opportunities but also straining infrastructure, housing, public services, and the environment.</li>
+                    <li><strong>The Silver Wave: Aging Populations:</strong> Many nations are seeing aging populations due to lower birth rates and longer lives. This brings challenges for healthcare, social support, and economies, requiring innovative responses.</li>
+                    <li><strong>Our Planet, Our Responsibility: Climate Change:</strong> Population size and consumption patterns are linked to climate change. A larger population can mean greater resource use and emissions, making sustainable development and green tech crucial.</li>
+                    <li><strong>The Pursuit of Equity and Justice:</strong> Ensuring everyone has access to opportunities, healthcare, education, and a safe environment remains a global challenge. Population dynamics can amplify inequalities if not addressed with inclusive policies.</li>
+                </ul>
+                <p>Tokyo, Japan, offers a vivid example of a megacity grappling with urbanization and a rapidly aging population. They're exploring solutions like compact, transit-oriented development and enhanced senior healthcare, offering insights for other cities.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide11" class="slide" aria-labelledby="title11">
+                <h2>Foundations of Knowledge: Sources & Further Reading</h2>
+                <p>The insights here build on work by researchers and international organizations. To dive deeper into global population dynamics, consumption, and projections, these resources offer a wealth of information:</p>
+                <ul>
+                    <li>Brown, P. M., & Cameron, L. D. (2000). What can be done to reduce overconsumption? Ecological Economics, 32(1), 27–41. <a href="https://doi.org/10.1016/S0921-8009(99)00093-2" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0921-8009(99)00093-2</a></li>
+                    <li>United Nations (n.d.). Day of 8 Billion. Retrieved November 28, 2022, from <a href="https://www.un.org/en/dayof8billion" target="_blank" rel="noopener noreferrer">https://www.un.org/en/dayof8billion</a></li>
+                    <li>Hackett, C. (2022). Global population projected to exceed 8 billion in 2022; half live in just seven countries. Pew Research Center. Retrieved November 28, 2022, from <a href="https://www.pewresearch.org/fact-tank/2022/07/21/global-population-projected-to-exceed-8-billion-in-2022-half-live-in-just-seven-countries/" target="_blank" rel="noopener noreferrer">https://www.pewresearch.org/fact-tank/2022/07/21/global-population-projected-to-exceed-8-billion-in-2022-half-live-in-just-seven-countries/</a></li>
+                    <li>Lutz, W., Sanderson, W., & Scherbov, S. (2001). The end of world population growth. Nature, 412(6846), 543–545. <a href="https://doi.org/10.1038/35087589" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/35087589</a></li>
+                    <li>The World Bank (n.d.). Population, total | data. Retrieved November 24, 2022, from <a href="https://data.worldbank.org/indicator/SP.POP.TOTL?end=2020&start=1960&view=chart" target="_blank" rel="noopener noreferrer">https://data.worldbank.org/indicator/SP.POP.TOTL?end=2020&start=1960&view=chart</a></li>
+                    <li>Pradhan, E. (n.d.). Female Education and Childbearing: A Closer Look at the Data. Retrieved November 28, 2022, from <a href="https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data" target="_blank" rel="noopener noreferrer">https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data</a></li>
+                    <li>Roser, M., & Rodés-Guirao, L. (2013). Future Population Growth. Our World in Data. <a href="https://ourworldindata.org/future-population-growth" target="_blank" rel="noopener noreferrer">https://ourworldindata.org/future-population-growth</a></li>
+                </ul>
+                <div class="divider"></div>
+            </section>
+            <section id="slide12" class="slide" aria-labelledby="title12">
+                <h2>Concluding Reflections: Charting a Sustainable Course Together</h2>
+                <p>Global population growth is a complex story of challenges and opportunities. As we've seen, managing this journey wisely is about people – their lives, well-being, aspirations – and the health of our planet. By focusing on empowering individuals (especially women and girls) through education, ensuring healthcare access (including family planning), championing sustainable resource management, and fostering equitable development, we can work towards a future where humanity and nature thrive together. The insights here are a starting point for discussion and action, highlighting the power of informed policies, community action, and global cooperation. The future we build depends on the conscious, collaborative choices we make today.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide13" class="slide" aria-labelledby="title13">
+                <h2>Behind the Scenes: Tools & Methods</h2>
+                <p>Bringing this data story to life required credible data sources and modern digital tools, chosen for clarity, accuracy, and an engaging interactive experience. Here’s a look at what shaped this presentation:</p>
+                <ul>
+                    <li><strong>The Foundation (HTML, CSS, JavaScript):</strong> HTML structured the content, CSS handled the visual style and layout, and JavaScript enabled interactive slideshow features and navigation.</li>
+                    <li><strong>Interactive Visualizations (Plotly.js):</strong> This JavaScript library created the interactive charts and treemaps, allowing for features like hover-over details and filtering, to help you explore population trends more directly.</li>
+                    <li><strong>Initial Data Exploration (Tableau):</strong> Tableau was key for initial in-depth analysis and visualization, helping identify patterns and compelling stories in the raw data that informed this brief.</li>
+                    <li><strong>Data Wrangling (Pandas and Seaborn in Python):</strong> Python libraries like Pandas (for data manipulation) and Seaborn (for statistical visualization) were invaluable for preparing, cleaning, and analyzing datasets.</li>
+                    <li><strong>Credible Data Sources (World Bank, United Nations):</strong> Population statistics and projections are drawn from globally recognized organizations like the World Bank and the United Nations, ensuring reliable information.</li>
+                </ul>
+                <p>The goal was to transform complex global population data into a narrative that's clear, accessible, and thought-provoking, hoping to foster deeper understanding and encourage further exploration.</p>
+                <div class="divider"></div>
+            </section>
+            <section id="slide14" class="slide" aria-labelledby="title14">
+                <h2>Thank You for Exploring!</h2>
+                <p>Thank you for taking the time to explore these insights into global population dynamics. I hope this interactive presentation was informative and sparked new thoughts or questions. If you'd like to discuss any aspect further, please don't hesitate to reach out. Open dialogue is key to understanding and addressing the important global topics that shape our shared future. Your curiosity and engagement are truly valued.</p>
+                <p>Connect with me on <a href="https://www.linkedin.com/in/tobin-zolkowski-844873200/" target="_blank" rel="noopener noreferrer">LinkedIn</a> or reach out via my <a href="https://tobin-data-portfolio.netlify.app/" target="_blank" rel="noopener noreferrer">Contact Form</a>.</p>
+            </section>
+            <div class="nav" role="navigation" aria-label="Slide Controls">
+                <button onclick="previousSlide()">&#9664; Previous</button>
+                <button onclick="nextSlide()">Next &#9654;</button>
+            </div>
+        </main>
     </div>
     <footer>
-        <p>&copy; 2023 Tobin Zolkowski. All rights reserved.</p>
+        <p>Originally Published: Fall 2022. Last Updated: <time itemprop="dateModified" datetime="2025-05-06">May 6, 2025</time>.</p>
+        <p>&copy; 2022-2025 Tobin Zolkowski. All rights reserved.</p>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style="display:none;">
+            <meta itemprop="name" content="Tobin Zolkowski">
+            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <meta itemprop="url" content="https://tzolkowski96.github.io/global-population-insights/preview-image.svg">
+                <meta itemprop="width" content="600">
+                <meta itemprop="height" content="60">
+            </div>
+        </div>
     </footer>
-    <script>
-        let currentSlide = 1;
-        const slides = document.querySelectorAll('.slide');
-        const progressBar = document.getElementById('progress-bar');
-        const progressTitles = document.querySelectorAll('.progress-titles span');
-
-        function showSlide(n) {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                if (index === n - 1) {
-                    slide.classList.add('active');
-                }
-            });
-            progressBar.style.width = `${(n / slides.length) * 100}%`;
-            progressTitles.forEach((title, index) => {
-                title.classList.remove('active');
-                if (index === n - 1) {
-                    title.classList.add('active');
-                }
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide % slides.length) + 1;
-            showSlide(currentSlide);
-        }
-
-        function previousSlide() {
-            currentSlide = (currentSlide - 2 + slides.length) % slides.length + 1;
-            showSlide(currentSlide);
-        }
-
-        function jumpToSlide(n) {
-            currentSlide = n;
-            showSlide(currentSlide);
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            showSlide(currentSlide);
-
-            // Add keyboard navigation
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'ArrowRight') {
-                    nextSlide();
-                } else if (event.key === 'ArrowLeft') {
-                    previousSlide();
-                }
-            });
-
-            // Income Group by Year Bar Chart
-            const incomeData = {
-                x: ['Low income', 'Lower middle income', 'Upper middle income', 'High income'],
-                y: [689325511, 3534305686, 2501472739, 1272685768],
-                name: '2021',
-                type: 'bar',
-                marker: { color: '#1f77b4' },
-                text: [689325511, 3534305686, 2501472739, 1272685768],
-                hoverinfo: 'text'
-            };
-
-            const incomeData1991 = {
-                x: ['Low income', 'Lower middle income', 'Upper middle income', 'High income'],
-                y: [397930235, 2095938637, 1953141255, 1015171541],
-                name: '1991',
-                type: 'bar',
-                marker: { color: '#ff7f0e' },
-                text: [397930235, 2095938637, 1953141255, 1015171541],
-                hoverinfo: 'text'
-            };
-
-            const incomeData1960 = {
-                x: ['Low income', 'Lower middle income', 'Upper middle income', 'High income'],
-                y: [140851836, 998620901, 1115211252, 786152039],
-                name: '1960',
-                type: 'bar',
-                marker: { color: '#2ca02c' },
-                text: [140851836, 998620901, 1115211252, 786152039],
-                hoverinfo: 'text'
-            };
-
-            const incomeLayout = {
-                barmode: 'group',
-                title: 'Population Growth Rates by Income Group (1960, 1991, 2021)',
-                xaxis: { title: 'Income Group' },
-                yaxis: { title: 'Population' },
-                showlegend: true
-            };
-
-            Plotly.newPlot('income-group-chart', [incomeData, incomeData1991, incomeData1960], incomeLayout);
-
-            // Global Population Growth Rate per Region Treemap
-            const treemapData = [{
-                type: "treemap",
-                labels: ["Sub-Saharan Africa", "East Asia & Pacific", "Middle East & North Africa", "Latin America & Caribbean", "Europe & Central Asia", "South Asia", "North America"],
-                parents: ["", "", "", "", "", "", ""],
-                values: [1.201, 0.658, 0.656, 0.704, 0.415, 0.173, 0.029],
-                textinfo: "label+value",
-                texttemplate: "%{label}<br>%{value}",
-                hoverinfo: "label+value+text",
-                outsidetextfont: { size: 20, color: "#377eb8" },
-                marker: { line: { width: 2 } }
-            }];
-
-            const treemapLayout = {
-                title: "Global Population Growth Rate by Region (1960-2021)"
-            };
-
-            Plotly.newPlot('population-growth-treemap', treemapData, treemapLayout);
-
-            // Countries with the Biggest Population Line Chart
-            const populationDataChina = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [667070000, 818315000, 981235000, 1135185000, 1262645000, 1344130000, 1444216107],
-                mode: 'lines+markers',
-                name: 'China',
-                line: { color: '#1f77b4' }
-            };
-
-            const populationDataIndia = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [449480608, 555189792, 697956926, 870133480, 1059633677, 1234281170, 1380004385],
-                mode: 'lines+markers',
-                name: 'India',
-                line: { color: '#ff7f0e' }
-            };
-
-            const populationDataUSA = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [180671000, 205052000, 227225000, 249623000, 282162411, 309349689, 331002647],
-                mode: 'lines+markers',
-                name: 'USA',
-                line: { color: '#2ca02c' }
-            };
-
-            const populationDataIndonesia = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [87736352, 116235000, 147490000, 179378000, 211540429, 241834215, 273523621],
-                mode: 'lines+markers',
-                name: 'Indonesia',
-                line: { color: '#d62728' }
-            };
-
-            const populationDataPakistan = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [45886000, 60446000, 81357000, 108655000, 138085000, 170043000, 220892331],
-                mode: 'lines+markers',
-                name: 'Pakistan',
-                line: { color: '#9467bd' }
-            };
-
-            const populationDataBrazil = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [72211000, 95347000, 121149000, 149003225, 174790340, 194946470, 212559409],
-                mode: 'lines+markers',
-                name: 'Brazil',
-                line: { color: '#8c564b' }
-            };
-
-            const populationDataNigeria = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [45103000, 57428000, 73354000, 94860000, 122352000, 159708000, 206139587],
-                mode: 'lines+markers',
-                name: 'Nigeria',
-                line: { color: '#e377c2' }
-            };
-
-            const populationDataBangladesh = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [50181900, 65836000, 79704000, 104663000, 130193000, 148692131, 164689383],
-                mode: 'lines+markers',
-                name: 'Bangladesh',
-                line: { color: '#7f7f7f' }
-            };
-
-            const populationDataRussia = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [119897000, 130000000, 138082178, 148287000, 146404000, 142849449, 145912025],
-                mode: 'lines+markers',
-                name: 'Russia',
-                line: { color: '#bcbd22' }
-            };
-
-            const populationDataMexico = {
-                x: [1960, 1970, 1980, 1990, 2000, 2010, 2020],
-                y: [36996500, 50950000, 70145000, 88178000, 103263388, 115243000, 128932753],
-                mode: 'lines+markers',
-                name: 'Mexico',
-                line: { color: '#17becf' }
-            };
-
-            const populationLayout = {
-                title: 'Population Growth of the Ten Most Populous Countries (1960-2020)',
-                xaxis: {
-                    title: 'Year'
-                },
-                yaxis: {
-                    title: 'Population'
-                },
-                showlegend: true
-            };
-
-            Plotly.newPlot('population-growth-line-chart', [
-                populationDataChina,
-                populationDataIndia,
-                populationDataUSA,
-                populationDataIndonesia,
-                populationDataPakistan,
-                populationDataBrazil,
-                populationDataNigeria,
-                populationDataBangladesh,
-                populationDataRussia,
-                populationDataMexico
-            ], populationLayout);
-
-            // Adding interactivity: filter for the line chart
-            const dataMapping = {
-                'China': populationDataChina,
-                'India': populationDataIndia,
-                'USA': populationDataUSA,
-                'Indonesia': populationDataIndonesia,
-                'Pakistan': populationDataPakistan,
-                'Brazil': populationDataBrazil,
-                'Nigeria': populationDataNigeria,
-                'Bangladesh': populationDataBangladesh,
-                'Russia': populationDataRussia,
-                'Mexico': populationDataMexico
-            };
-
-            document.getElementById('country-filter').addEventListener('change', function(event) {
-                const country = event.target.value;
-                let filteredData;
-                if (country === 'all') {
-                    filteredData = Object.values(dataMapping);
-                } else {
-                    filteredData = [dataMapping[country]];
-                }
-                Plotly.react('population-growth-line-chart', filteredData, populationLayout);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
