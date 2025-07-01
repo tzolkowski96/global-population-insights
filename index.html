@@ -17,6 +17,13 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        // Immediate scroll to top to prevent center-start issue
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+        window.scrollTo(0, 0);
+    </script>
     <link itemprop="mainEntityOfPage" href="https://tzolkowski96.github.io/global-population-insights/">
     <meta itemprop="datePublished" content="2022-11-15">
     <meta itemprop="dateModified" content="2025-07-01">

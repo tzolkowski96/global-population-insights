@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Ensure page starts at top
+    window.scrollTo(0, 0);
+    
     const slides = document.querySelectorAll('.slide');
     const navButtons = document.querySelectorAll('.vertical-navigation-bar button');
     const countryFilter = document.getElementById('country-filter');
@@ -22,6 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         currentSlide = index;
         updateNavButtons();
         updateURLForSlide(index + 1);
+
+        // Scroll to top of content when changing slides
+        // For the first slide, scroll to absolute top; for others, to main content
+        if (index === 0) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
 
         // Focus on the new slide's main heading for accessibility
         const activeSlideHeading = slides[index].querySelector('h1, h2');

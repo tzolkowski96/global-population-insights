@@ -26,6 +26,15 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: var(--font-family-sans-serif);
     line-height: 1.6;
@@ -34,6 +43,7 @@ body {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Accessibility: Focus Styles */
@@ -102,10 +112,11 @@ blockquote p {
 
 /* Header */
 header {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0 var(--spacing-md) 0; /* Reduce bottom padding */
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-lg); /* Reduce bottom margin */
     text-align: center;
+    background-color: var(--background-color);
 }
 
 header h1 {
@@ -168,19 +179,27 @@ header h1 {
 .main-content {
     margin-top: 80px; /* Space for fixed header */
     padding: var(--spacing-md);
+    min-height: calc(100vh - 80px); /* Ensure content fills viewport */
+    padding-top: var(--spacing-sm); /* Reduce top padding to prevent centering */
 }
 
 /* Slides */
 .slide {
     display: none;
     max-width: 800px;
-    margin: 0 auto var(--spacing-2xl);
-    padding: var(--spacing-xl) 0;
+    margin: 0 auto;
+    padding: var(--spacing-lg) 0;
     animation: fadeIn 0.3s ease-out;
+    scroll-margin-top: 100px; /* Account for fixed navigation */
 }
 
 .slide.active {
     display: block;
+}
+
+.slide:first-child {
+    margin-top: 0;
+    padding-top: var(--spacing-md); /* Give it some top padding instead of none */
 }
 
 @keyframes fadeIn {
@@ -516,6 +535,11 @@ footer p:last-child {
 
 /* Small screens and accessibility */
 @media (max-width: 480px) {
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    
     body {
         font-size: 15px;
     }
@@ -524,8 +548,9 @@ footer p:last-child {
     h2 { font-size: 1.5rem; }
     
     .main-content {
-        margin-top: 70px;
+        margin-top: 60px;
         padding: var(--spacing-sm);
+        min-height: calc(100vh - 60px);
     }
     
     .sidebar-navigation {
@@ -544,7 +569,12 @@ footer p:last-child {
     }
     
     .slide {
-        padding: var(--spacing-lg) 0;
+        padding: var(--spacing-md) 0;
+        scroll-margin-top: 70px;
+    }
+    
+    .slide:first-child {
+        padding-top: var(--spacing-sm); /* Consistent with desktop but smaller */
     }
     
     .nav {
