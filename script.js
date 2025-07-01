@@ -9,11 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial Setup ---
     function initializeSlideshow() {
-        showSlide(currentSlide);
+        // Set up the first slide without triggering scroll behavior
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === 0);
+            slide.setAttribute('aria-hidden', i !== 0);
+        });
+        currentSlide = 0;
         updateNavButtons();
         loadCharts();
         setupEventListeners();
-        updateURLForSlide(currentSlide + 1); // Initial URL update
+        updateURLForSlide(1);
+        
+        // Ensure we start at the very top to show the header and title
+        window.scrollTo(0, 0);
+        
+        // Handle hash changes after initial load
+        handleHashChange();
     }
 
     // --- Slide Navigation ---
@@ -27,21 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateURLForSlide(index + 1);
 
         // Scroll to top of content when changing slides
-        // For the first slide, scroll to absolute top; for others, to main content
+        // For the first slide, scroll to absolute top to show the header; for others, to main content
         if (index === 0) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Don't auto-focus on the first slide's heading to keep the header visible
         } else {
             const mainContent = document.querySelector('.main-content');
             if (mainContent) {
                 mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-        }
-
-        // Focus on the new slide's main heading for accessibility
-        const activeSlideHeading = slides[index].querySelector('h1, h2');
-        if (activeSlideHeading) {
-            activeSlideHeading.setAttribute('tabindex', '-1'); // Make it focusable
-            activeSlideHeading.focus();
+            // Focus on the slide's main heading for accessibility (non-first slides only)
+            const activeSlideHeading = slides[index].querySelector('h1, h2');
+            if (activeSlideHeading) {
+                activeSlideHeading.setAttribute('tabindex', '-1');
+                activeSlideHeading.focus();
+            }
         }
     }
 

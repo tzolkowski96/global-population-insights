@@ -112,9 +112,9 @@ blockquote p {
 
 /* Header */
 header {
-    padding: var(--spacing-lg) 0 var(--spacing-md) 0; /* Reduce bottom padding */
+    padding: var(--spacing-md) 0; /* Reduce padding for tighter layout */
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: var(--spacing-lg); /* Reduce bottom margin */
+    margin-bottom: var(--spacing-md); /* Reduce bottom margin */
     text-align: center;
     background-color: var(--background-color);
 }
@@ -178,9 +178,8 @@ header h1 {
 
 .main-content {
     margin-top: 80px; /* Space for fixed header */
-    padding: var(--spacing-md);
+    padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md); /* Remove top padding */
     min-height: calc(100vh - 80px); /* Ensure content fills viewport */
-    padding-top: var(--spacing-sm); /* Reduce top padding to prevent centering */
 }
 
 /* Slides */
@@ -199,7 +198,7 @@ header h1 {
 
 .slide:first-child {
     margin-top: 0;
-    padding-top: var(--spacing-md); /* Give it some top padding instead of none */
+    padding-top: 0; /* Remove top padding to start right after header */
 }
 
 @keyframes fadeIn {
