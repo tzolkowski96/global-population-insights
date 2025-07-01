@@ -100,13 +100,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 textposition: 'outside'
             }], {
                 title: 'Population Growth Rate by Income Group (CAGR %)',
-                xaxis: { title: 'Income Group', automargin: true },
-                yaxis: { title: 'CAGR %', automargin: true },
-                margin: { t: 50, b: 50, l: 60, r: 30 }, // Adjusted margins
-                paper_bgcolor: 'var(--light-gray)',
-                plot_bgcolor: 'var(--light-gray)',
-                // Further accessibility: enable keyboard navigation for chart elements
-                config: { accessible: true, responsive: true }
+                xaxis: { 
+                    title: 'Income Group', 
+                    automargin: true,
+                    tickfont: { size: 12 }
+                },
+                yaxis: { 
+                    title: 'CAGR %', 
+                    automargin: true,
+                    tickfont: { size: 12 }
+                },
+                margin: { t: 60, b: 60, l: 60, r: 30 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: { family: 'system-ui, -apple-system, sans-serif', size: 12 },
+                config: { 
+                    accessible: true, 
+                    responsive: true,
+                    displayModeBar: false
+                }
             }).then(function() {
                 incomeGroupChartDiv.classList.remove('chart-container-loading');
             }).catch(function(err){
@@ -132,10 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 hoverlabel: { bgcolor: "white" }
             }], {
                 title: 'Global Population Distribution & Regional Growth Focus',
-                margin: {t: 50, l: 25, r: 25, b: 25},
-                paper_bgcolor: 'var(--light-gray)',
-                // Further accessibility
-                config: { accessible: true, responsive: true }
+                margin: {t: 60, l: 25, r: 25, b: 25},
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                font: { family: 'system-ui, -apple-system, sans-serif', size: 12 },
+                config: { 
+                    accessible: true, 
+                    responsive: true,
+                    displayModeBar: false
+                }
             }).then(function(){
                 treemapDiv.classList.remove('chart-container-loading');
             }).catch(function(err){
@@ -185,15 +201,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const lineLayout = {
-                title: 'Population Growth of Top Countries', // Updated title for clarity
-                xaxis: { title: 'Year', automargin: true },
-                yaxis: { title: 'Population (Millions)', automargin: true },
-                margin: { t: 50, b: 80, l: 60, r: 30 }, // Adjusted bottom margin for legend
-                paper_bgcolor: 'var(--light-gray)',
-                plot_bgcolor: 'var(--light-gray)',
-                legend: {orientation: 'h', yanchor: 'bottom', y: -0.3, xanchor: 'center', x: 0.5}, // Adjusted legend position
-                // Further accessibility
-                config: { accessible: true, responsive: true }
+                title: 'Population Growth of Top Countries',
+                xaxis: { 
+                    title: 'Year', 
+                    automargin: true,
+                    tickfont: { size: 12 }
+                },
+                yaxis: { 
+                    title: 'Population (Millions)', 
+                    automargin: true,
+                    tickfont: { size: 12 }
+                },
+                margin: { t: 60, b: 100, l: 60, r: 30 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: { family: 'system-ui, -apple-system, sans-serif', size: 12 },
+                legend: {
+                    orientation: 'h', 
+                    yanchor: 'bottom', 
+                    y: -0.3, 
+                    xanchor: 'center', 
+                    x: 0.5,
+                    font: { size: 11 }
+                },
+                config: { 
+                    accessible: true, 
+                    responsive: true,
+                    displayModeBar: false
+                }
             };
 
             Plotly.newPlot(lineChartDiv, getTraces('all'), lineLayout, lineLayout.config).then(function(){
