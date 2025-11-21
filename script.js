@@ -1,100 +1,63 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Ensure page starts at top
-    window.scrollTo(0, 0);
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
     
-    const slides = document.querySelectorAll('.slide');
     const navButtons = document.querySelectorAll('.vertical-navigation-bar button');
+    const sections = document.querySelectorAll('.slide');
     const countryFilter = document.getElementById('country-filter');
-    let currentSlide = 0;
 
-    // --- Initial Setup ---
-    function initializeSlideshow() {
-        // Set up the first slide without triggering scroll behavior
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === 0);
-            slide.setAttribute('aria-hidden', i !== 0);
-        });
-        currentSlide = 0;
-        updateNavButtons();
-        loadCharts();
-        setupEventListeners();
-        updateURLForSlide(1);
-        
-        // Ensure we start at the very top to show the header and title
-        window.scrollTo(0, 0);
-        
-        // Handle hash changes after initial load
-        handleHashChange();
-    }
+    // --- ScrollSpy & Navigation Logic ---
+    function setupScrollSpy() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Active when section is in the middle of viewport
+            threshold: 0
+        };
 
-    // --- Slide Navigation ---
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-            slide.setAttribute('aria-hidden', i !== index);
-        });
-        currentSlide = index;
-        updateNavButtons();
-        updateURLForSlide(index + 1);
-
-        // Scroll to top of content when changing slides
-        // For the first slide, scroll to absolute top to show the header; for others, to main content
-        if (index === 0) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            // Don't auto-focus on the first slide's heading to keep the header visible
-        } else {
-            const mainContent = document.querySelector('.main-content');
-            if (mainContent) {
-                mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            // Focus on the slide's main heading for accessibility (non-first slides only)
-            const activeSlideHeading = slides[index].querySelector('h1, h2');
-            if (activeSlideHeading) {
-                activeSlideHeading.setAttribute('tabindex', '-1');
-                activeSlideHeading.focus();
-            }
-        }
-    }
-
-    window.nextSlide = () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    };
-
-    window.previousSlide = () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    };
-
-    window.jumpToSlide = (slideNumber) => {
-        showSlide(slideNumber - 1);
-    };
-
-    function updateNavButtons() {
-        navButtons.forEach((button, i) => {
-            button.classList.toggle('active', i === currentSlide);
-            button.setAttribute('aria-pressed', i === currentSlide);
-        });
-    }
-
-    // --- URL Hashing for Deep Linking ---
-    function updateURLForSlide(slideNumber) {
-        // Only update hash if it's different to prevent history spam
-        if (window.location.hash !== `#slide${slideNumber}`) {
-            window.location.hash = `slide${slideNumber}`;
-        }
-    }
-
-    function handleHashChange() {
-        const hash = window.location.hash;
-        if (hash) {
-            const slideNumber = parseInt(hash.substring(6), 10); // Assumes #slideN format
-            if (!isNaN(slideNumber) && slideNumber > 0 && slideNumber <= slides.length) {
-                if (currentSlide !== slideNumber -1) { // Only jump if it's a different slide
-                    showSlide(slideNumber - 1);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    updateActiveNav(id);
                 }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    }
+
+    function updateActiveNav(id) {
+        navButtons.forEach(button => {
+            const target = button.getAttribute('data-target');
+            if (target === id) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
             }
-        }
+        });
+    }
+
+    function setupSmoothScrolling() {
+        navButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = button.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Manually update active state immediately for better UX
+                    updateActiveNav(targetId);
+                }
+            });
+        });
     }
 
     // --- Chart Loading and Interactivity (Plotly.js) ---
@@ -102,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ensure Plotly is loaded before calling its methods
         if (typeof Plotly === 'undefined') {
             console.error("Plotly.js not loaded. Charts cannot be rendered.");
-            // Optionally, display a message to the user in the chart divs
             const chartDivs = document.querySelectorAll('#income-group-chart, #population-growth-treemap, #population-growth-line-chart');
             chartDivs.forEach(div => {
                 div.innerHTML = '<p style="color:red; text-align:center; padding-top: 20px;">Error: Chart library not loaded. Cannot display chart.</p>';
@@ -111,84 +73,110 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Example: Income Group Chart (Bar Chart)
-        const incomeGroupChartDiv = document.getElementById('income-group-chart');
-        if (incomeGroupChartDiv) {
-            Plotly.newPlot(incomeGroupChartDiv, [{
+        // Helper to lazy load charts
+        function lazyLoadChart(id, renderFn) {
+            const chartDiv = document.getElementById(id);
+            if (!chartDiv) return;
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        renderFn(chartDiv);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: "200px" }); // Load when 200px away
+
+            observer.observe(chartDiv);
+        }
+
+        // 1. Income Group Chart
+        lazyLoadChart('income-group-chart', (div) => {
+            Plotly.newPlot(div, [{
                 x: ['Low Income', 'Lower Middle', 'Upper Middle', 'High Income'],
                 y: [0.8, 1.5, 1.2, 0.5], // Example CAGR values
                 type: 'bar',
-                marker: { color: '#005A9C' },
-                // Accessibility enhancements for Plotly charts
-                hoverlabel: { bgcolor: "white" },
+                marker: { 
+                    color: ['#d6d3d1', '#38b2ac', '#319795', '#2d3748'], // Teal & Gray mix
+                    line: {
+                        color: 'rgba(255,255,255,0.5)',
+                        width: 1
+                    }
+                },
+                hoverlabel: { bgcolor: "#1a202c", font: { color: "white" } },
                 texttemplate: '%{y:.2f}%', 
                 textposition: 'outside'
             }], {
-                title: 'Population Growth Rate by Income Group (CAGR %)',
+                title: {
+                    text: 'Population Growth Rate by Income Group (CAGR %)',
+                    font: { size: 18, color: '#1a202c', family: 'Playfair Display, serif' }
+                },
                 xaxis: { 
                     title: 'Income Group', 
                     automargin: true,
-                    tickfont: { size: 12 }
+                    tickfont: { size: 12, color: '#4a5568', family: 'Inter, sans-serif' },
+                    gridcolor: '#e2e8f0'
                 },
                 yaxis: { 
                     title: 'CAGR %', 
                     automargin: true,
-                    tickfont: { size: 12 }
+                    tickfont: { size: 12, color: '#4a5568', family: 'Inter, sans-serif' },
+                    gridcolor: '#e2e8f0'
                 },
                 margin: { t: 60, b: 60, l: 60, r: 30 },
                 paper_bgcolor: 'rgba(0,0,0,0)',
                 plot_bgcolor: 'rgba(0,0,0,0)',
-                font: { family: 'system-ui, -apple-system, sans-serif', size: 12 },
+                font: { family: 'Inter, system-ui, sans-serif', size: 13 },
                 config: { 
                     accessible: true, 
                     responsive: true,
                     displayModeBar: false
                 }
-            }).then(function() {
-                incomeGroupChartDiv.classList.remove('chart-container-loading');
-            }).catch(function(err){
-                console.error("Plotly error (Income Chart): ", err);
-                incomeGroupChartDiv.innerHTML = '<p style="color:red; text-align:center; padding-top: 20px;">Could not load Income Group chart.</p>';
-                incomeGroupChartDiv.classList.remove('chart-container-loading');
-            });
-        }
+            }).then(() => div.classList.remove('chart-container-loading'));
+        });
 
-        // Example: Population Growth Treemap
-        const treemapDiv = document.getElementById('population-growth-treemap');
-        if (treemapDiv) {
-            Plotly.newPlot(treemapDiv, [{
+        // 2. Treemap
+        lazyLoadChart('population-growth-treemap', (div) => {
+            Plotly.newPlot(div, [{
                 type: "treemap",
                 labels: ['Asia', 'Africa', 'Europe', 'North America', 'South America', 'Oceania',
                          'Sub-Saharan Africa', 'East Asia & Pacific', 'Europe & Central Asia'],
                 parents: ['', '', '', '', '', '', 'Africa', 'Asia', 'Europe'],
                 values:  [4700, 1400, 750, 600, 440, 43, 1200, 2300, 700], // Example population numbers (millions)
-                marker: {colors: ['#003366', '#005A9C', '#4A90E2', '#7BAFDE', '#A8D8F0', '#CFEAF7', '#004B87', '#2A7ABF', '#609AD4']},
+                marker: {
+                    colors: [
+                        '#2d3748', // Asia (Dark Blue-Gray)
+                        '#4a5568', // Africa
+                        '#718096', // Europe
+                        '#a0aec0', // NA
+                        '#cbd5e0', // SA
+                        '#e2e8f0', // Oceania
+                        '#38b2ac', // Sub-Saharan (Teal Accent)
+                        '#319795', // East Asia
+                        '#2c7a7b'  // Europe Central
+                    ]
+                },
                 textinfo: "label+value+percent parent+percent root",
                 hoverinfo: 'label+value+percent parent+percent root',
-                // Accessibility enhancements
-                hoverlabel: { bgcolor: "white" }
+                hoverlabel: { bgcolor: "#1a202c", font: { color: "white" } }
             }], {
-                title: 'Global Population Distribution & Regional Growth Focus',
+                title: {
+                    text: 'Global Population Distribution & Regional Growth Focus',
+                    font: { size: 18, color: '#1a202c', family: 'Playfair Display, serif' }
+                },
                 margin: {t: 60, l: 25, r: 25, b: 25},
                 paper_bgcolor: 'rgba(0,0,0,0)',
-                font: { family: 'system-ui, -apple-system, sans-serif', size: 12 },
+                font: { family: 'Inter, system-ui, sans-serif', size: 13 },
                 config: { 
                     accessible: true, 
                     responsive: true,
                     displayModeBar: false
                 }
-            }).then(function(){
-                treemapDiv.classList.remove('chart-container-loading');
-            }).catch(function(err){
-                console.error("Plotly error (Treemap): ", err);
-                treemapDiv.innerHTML = '<p style="color:red; text-align:center; padding-top: 20px;">Could not load Treemap chart.</p>';
-                treemapDiv.classList.remove('chart-container-loading');
-            });
-        }
+            }).then(() => div.classList.remove('chart-container-loading'));
+        });
 
-        // Example: Population Growth Line Chart (Filterable)
-        const lineChartDiv = document.getElementById('population-growth-line-chart');
-        if (lineChartDiv) {
+        // 3. Line Chart
+        lazyLoadChart('population-growth-line-chart', (div) => {
             const allCountryData = {
                 China: { x: [1960, 1980, 2000, 2020], y: [667, 981, 1262, 1412], name: 'China' },
                 India: { x: [1960, 1980, 2000, 2020], y: [450, 698, 1053, 1380], name: 'India' },
@@ -198,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Brazil: { x: [1960, 1980, 2000, 2020], y: [72, 121, 174, 212], name: 'Brazil' },
                 Nigeria: { x: [1960, 1980, 2000, 2020], y: [45, 74, 122, 206], name: 'Nigeria' },
                 Bangladesh: { x: [1960, 1980, 2000, 2020], y: [48, 88, 131, 164], name: 'Bangladesh' },
-                Russia: { x: [1960, 1980, 2000, 2020], y: [119, 138, 146, 145], name: 'Russian Federation' }, // Updated name
+                Russia: { x: [1960, 1980, 2000, 2020], y: [119, 138, 146, 145], name: 'Russian Federation' },
                 Mexico: { x: [1960, 1980, 2000, 2020], y: [38, 68, 98, 128], name: 'Mexico' },
             };
 
@@ -210,7 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'scatter',
                         mode: 'lines+markers',
                         name: country.name,
-                        hoverlabel: { bgcolor: "white" } // Accessibility
+                        line: { width: 3 },
+                        marker: { size: 6 },
+                        hoverlabel: { bgcolor: "#1a202c", font: { color: "white" } }
                     }));
                 } else {
                     const country = allCountryData[selectedCountry];
@@ -220,34 +210,41 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'scatter',
                         mode: 'lines+markers',
                         name: country.name,
-                        hoverlabel: { bgcolor: "white" } // Accessibility
+                        line: { width: 4, color: '#38b2ac' }, // Teal Accent
+                        marker: { size: 8, color: '#1a202c' },
+                        hoverlabel: { bgcolor: "#1a202c", font: { color: "white" } }
                     }];
                 }
             }
 
             const lineLayout = {
-                title: 'Population Growth of Top Countries',
+                title: {
+                    text: 'Population Growth of Top Countries',
+                    font: { size: 18, color: '#1a202c', family: 'Playfair Display, serif' }
+                },
                 xaxis: { 
                     title: 'Year', 
                     automargin: true,
-                    tickfont: { size: 12 }
+                    tickfont: { size: 12, color: '#4a5568', family: 'Inter, sans-serif' },
+                    gridcolor: '#e2e8f0'
                 },
                 yaxis: { 
                     title: 'Population (Millions)', 
                     automargin: true,
-                    tickfont: { size: 12 }
+                    tickfont: { size: 12, color: '#4a5568', family: 'Inter, sans-serif' },
+                    gridcolor: '#e2e8f0'
                 },
                 margin: { t: 60, b: 100, l: 60, r: 30 },
                 paper_bgcolor: 'rgba(0,0,0,0)',
                 plot_bgcolor: 'rgba(0,0,0,0)',
-                font: { family: 'system-ui, -apple-system, sans-serif', size: 12 },
+                font: { family: 'Inter, system-ui, sans-serif', size: 13 },
                 legend: {
                     orientation: 'h', 
                     yanchor: 'bottom', 
                     y: -0.3, 
                     xanchor: 'center', 
                     x: 0.5,
-                    font: { size: 11 }
+                    font: { size: 11, color: '#4a5568' }
                 },
                 config: { 
                     accessible: true, 
@@ -256,52 +253,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            Plotly.newPlot(lineChartDiv, getTraces('all'), lineLayout, lineLayout.config).then(function(){
-                lineChartDiv.classList.remove('chart-container-loading');
-            }).catch(function(err){
-                console.error("Plotly error (Line Chart): ", err);
-                lineChartDiv.innerHTML = '<p style="color:red; text-align:center; padding-top: 20px;">Could not load Line chart.</p>';
-                lineChartDiv.classList.remove('chart-container-loading');
-            });
+            Plotly.newPlot(div, getTraces('all'), lineLayout, lineLayout.config).then(() => div.classList.remove('chart-container-loading'));
 
             if (countryFilter) {
                 countryFilter.addEventListener('change', (event) => {
-                    lineChartDiv.classList.add('chart-container-loading'); // Add loading class before react
+                    div.classList.add('chart-container-loading');
                     const selectedCountry = event.target.value;
-                    Plotly.react(lineChartDiv, getTraces(selectedCountry), lineLayout, lineLayout.config).then(function(){
-                        lineChartDiv.classList.remove('chart-container-loading');
-                    }).catch(function(err){
-                        console.error("Plotly error (Line Chart Update): ", err);
-                        lineChartDiv.innerHTML = '<p style="color:red; text-align:center; padding-top: 20px;">Could not update Line chart.</p>';
-                        lineChartDiv.classList.remove('chart-container-loading');
-                    });
+                    Plotly.react(div, getTraces(selectedCountry), lineLayout, lineLayout.config).then(() => div.classList.remove('chart-container-loading'));
                 });
             }
-        }
+        });
     }
 
-    // --- Event Listeners ---
-    function setupEventListeners() {
-        // Keyboard navigation for slides
-        document.addEventListener('keydown', (event) => {
-            if (event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT' || event.target.tagName === 'TEXTAREA') {
-                return; // Don't interfere with form input
-            }
-            if (event.key === 'ArrowRight') {
-                nextSlide();
-            }
-            if (event.key === 'ArrowLeft') {
-                previousSlide();
+    // --- Initialization ---
+    setupScrollSpy();
+    setupSmoothScrolling();
+    loadCharts();
+
+    // Handle window resize for charts
+    window.addEventListener('resize', () => {
+        const chartDivs = document.querySelectorAll('#income-group-chart, #population-growth-treemap, #population-growth-line-chart');
+        chartDivs.forEach(div => {
+            if (div.data) {
+                Plotly.Plots.resize(div);
             }
         });
-
-        // Handle hash changes for deep linking
-        window.addEventListener('hashchange', handleHashChange);
-
-        // Initial check for hash on page load
-        handleHashChange(); // Call on load to jump to slide if hash is present
-    }
-
-    // --- Start the slideshow ---
-    initializeSlideshow();
+    });
 });

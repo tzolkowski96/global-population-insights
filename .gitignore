@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Node (if you add dependencies later)
+node_modules/
+npm-debug.log
+
+# Python (if you add scripts later)
+__pycache__/
+*.py[cod]
+.venv
+env/
+venv/
+
+# Environment variables
+.env

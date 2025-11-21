@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title itemprop="name headline">Global Population Insights: A Policy Brief</title>
-    <meta name="description" content="Explore global population growth with interactive data, projections, impacts, and policy recommendations in this slideshow.">
+    <meta name="description" content="Explore global population growth with interactive data, projections, impacts, and policy recommendations.">
     <meta name="keywords" content="population growth, data visualization, policy brief, global trends, demography, interactive presentation, Tobin Zolkowski">
     <meta name="author" content="Tobin Zolkowski">
     <!-- Open Graph Meta Tags -->
@@ -14,82 +14,84 @@
     <meta property="og:url" content="https://tzolkowski96.github.io/global-population-insights/">
     <meta property="og:image" content="https://tzolkowski96.github.io/global-population-insights/preview-image.svg">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script>
-        // Immediate scroll to top to prevent center-start issue
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-        window.scrollTo(0, 0);
-    </script>
     <link itemprop="mainEntityOfPage" href="https://tzolkowski96.github.io/global-population-insights/">
     <meta itemprop="datePublished" content="2022-11-15">
     <meta itemprop="dateModified" content="2025-07-01">
     <meta itemprop="image" content="https://tzolkowski96.github.io/global-population-insights/preview-image.svg">
 </head>
 <body itemprop="articleBody">
-    <nav class="sidebar-navigation" aria-label="Slideshow navigation">
-        <div id="progress-titles" class="vertical-navigation-bar" role="navigation" aria-label="Slideshow Navigation">
-            <button id="title1" onclick="jumpToSlide(1)" class="active" aria-label="Introduction">Intro</button>
-            <button id="title2" onclick="jumpToSlide(2)" aria-label="Summary">Summary</button>
-            <button id="title3" onclick="jumpToSlide(3)" aria-label="Projections">Future</button>
-            <button id="title4" onclick="jumpToSlide(4)" aria-label="Income Groups">Income</button>
-            <button id="title5" onclick="jumpToSlide(5)" aria-label="Regions">Regions</button>
-            <button id="title6" onclick="jumpToSlide(6)" aria-label="Countries">Countries</button>
-            <button id="title7" onclick="jumpToSlide(7)" aria-label="Recommendations">Policy</button>
-            <button id="title8" onclick="jumpToSlide(8)" aria-label="Resources">Resources</button>
-            <button id="title9" onclick="jumpToSlide(9)" aria-label="Case Studies">Cases</button>
-            <button id="title10" onclick="jumpToSlide(10)" aria-label="Challenges">Challenges</button>
-            <button id="title11" onclick="jumpToSlide(11)" aria-label="References">References</button>
-            <button id="title12" onclick="jumpToSlide(12)" aria-label="Conclusion">Conclusion</button>
-            <button id="title13" onclick="jumpToSlide(13)" aria-label="Technologies">Tech</button>
-            <button id="title14" onclick="jumpToSlide(14)" aria-label="Thank You">Contact</button>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-navigation">
+        <div class="sidebar-header">
+            <h1>Global Population Insights</h1>
+            <p>A Policy Brief by Tobin Zolkowski</p>
+        </div>
+        <div id="progress-titles" class="vertical-navigation-bar" role="navigation" aria-label="Main Navigation">
+            <button data-target="slide1" class="active">Introduction</button>
+            <button data-target="slide2">Summary</button>
+            <button data-target="slide3">Future Projections</button>
+            <button data-target="slide4">Income Groups</button>
+            <button data-target="slide5">Regional Shifts</button>
+            <button data-target="slide6">Country Spotlight</button>
+            <button data-target="slide7">Policy Recommendations</button>
+            <button data-target="slide8">Resource Impact</button>
+            <button data-target="slide9">Success Stories</button>
+            <button data-target="slide10">Future Challenges</button>
+            <button data-target="slide11">References</button>
+            <button data-target="slide12">Technologies</button>
+            <button data-target="slide13">Contact</button>
         </div>
     </nav>
+
+    <!-- Main Content Area -->
     <div class="main-content">
-        <header>
-            <div class="container">
-                <h1 itemprop="headline">Global Population Insights</h1>
-                <div itemprop="author" itemscope itemtype="https://schema.org/Person" style="display:none;">
-                    <meta itemprop="name" content="Tobin Zolkowski">
-                </div>
-            </div>
-        </header>
-        <main class="container" role="main">
-            <section id="slide1" class="slide active" aria-labelledby="title1">
+        <main role="main">
+            <section id="slide1" class="slide">
                 <h1>Our World at 8 Billion</h1>
-                <p>By <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Tobin Zolkowski</span></span></p>
-                <p>Welcome to an interactive exploration of global population growth. This project, originally created for my MS Information program at UW-Madison, examines population trends from 1960 to 2021 and their implications for our shared future.</p>
-                <p>Let's explore the data, understand the impacts, and consider the policy pathways ahead.</p>
+                <p><strong>Welcome to the human story behind the numbers.</strong></p>
+                <p>In late 2022, our global family reached a historic milestone: 8 billion people. But this isn't just about a big number. It's about how we live, how we grow, and how we share our planet.</p>
+                <p>This project takes you on a journey through the data—from the past 60 years to the future ahead—to understand what this growth means for all of us.</p>
             </section>
-            <section id="slide2" class="slide" aria-labelledby="title2">
-                <h2>A Snapshot of Our Ever-Expanding World</h2>
-                <p>On November 15, 2022, the UN announced our global population reached <span class="highlight">8 billion</span>. Projections suggest we'll hit <span class="highlight">9 billion</span> before 2030.</p>
-                <p>This rapid growth creates pressure on resources and ecosystems, but also opportunities for innovation and sustainable development.</p>
-                <blockquote><p>“The delicate balance between our growing global family and Earth's finite resources urgently calls for careful planning, forward-thinking policies, and fair strategies for everyone.”</p></blockquote>
-                <p>This policy brief is your guide to understanding population data. We'll journey back in time, looking at trends from 1960 to 1991, and then compare them with the more recent era of 1991 to 2021. We'll also shine a spotlight on the most populous nations, exploring the human stories and societal currents behind the raw numbers—all brought to life with clear, engaging, and interactive visualizations. Our aim is more than just presenting data; we hope to spark meaningful conversations about crucial policy ideas, like advancing education for women and girls worldwide and promoting sustainable resource use for generations to come.</p>
-                <div class="divider"></div>
+
+            <section id="slide2" class="slide">
+                <h2>A Snapshot of Our Growing World</h2>
+                <p>Imagine a room with 8 billion people. That's us right now. And by 2030, we're expected to add another billion.</p>
+                <p>This rapid growth brings both challenges and opportunities. More people means more brilliant minds to solve problems, but it also means we need to be smarter about how we use Earth's resources.</p>
+                <blockquote><p>“The delicate balance between our growing global family and Earth's finite resources calls for careful planning and fair strategies for everyone.”</p></blockquote>
+                <p>In this brief, we'll look beyond the charts. We'll explore the stories of the most populous nations, see how education shapes families, and discuss ideas that can help us build a sustainable future. It's not just data; it's a conversation about our shared home.</p>
             </section>
-            <section id="slide3" class="slide" aria-labelledby="title3">
-                <h2>Peeking into Our Demographic Future: What Lies Ahead?</h2>
-                <p>So, what does the future hold for our global population? Conrad Hackett, a demographer at Pew Research Center, painted a vivid picture: our world likely surpassed <span class="highlight">8 billion</span> around 2023. A striking fact is that a large chunk of humanity lives in just a few countries. Think of the United States, Indonesia, Pakistan, Nigeria, and Brazil – all major players in population numbers. For a long time, China and India have led the global count, and they're expected to keep growing, though with some changes. Interestingly, while China has historically been the most populous, shifts in birth rates and policies mean India was projected to take that top spot in 2023. This isn't just a list reordering; it reflects deep societal changes, evolving families, and economic developments with big implications for global resources, geopolitics, and cultural exchange. Plus, looking at historical data, we see that population growth hasn't been constant. It showed different patterns from 1960-1991 compared to 1991-2021, hinting at how things like healthcare, education, and socio-economic shifts shape our collective journey.</p>
-                <div class="divider"></div>
+
+            <section id="slide3" class="slide">
+                <h2>What Lies Ahead?</h2>
+                <p>So, where are we heading? Experts predict that while we are still growing, the <em>pace</em> is changing. We likely passed the 8 billion mark in 2023, but the growth isn't happening everywhere at once.</p>
+                <p>A huge portion of humanity lives in just a handful of countries. You might know the big ones: <strong>China</strong> and <strong>India</strong>. For decades, China was the most populous, but India is taking the lead. This shift isn't just a statistic—it changes the global economy, culture, and geopolitics.</p>
+                <p>We're also seeing a tale of two eras: the rapid growth of the late 20th century versus the slower, more complex trends of today. Factors like better healthcare and education are reshaping how our global family grows.</p>
             </section>
-            <section id="slide4" class="slide" aria-labelledby="title4">
-                <h2>Population Dynamics Across Income Levels</h2>
+
+            <section id="slide4" class="slide">
+                <h2>Rich, Poor, and Growing: The Income Gap</h2>
                 <div id="income-group-chart" class="chart-container-loading" aria-label="Bar chart showing Population Growth Rates by Income Group (CAGR %)"></div>
-                <p>Let's explore how economic standing and population trends connect. The bar chart above, using World Bank data, clearly shows how population growth has varied across income groups from 1960 to 2021. It's clear that while population growth affects everyone, its pace differs. One key takeaway is that middle-income nations, as a group, have generally seen faster population growth than low- or high-income countries. This isn't just a statistic; it hints at complex socio-economic stories. Factors like access to healthcare, education quality, economic dynamism, and family planning resources all play a role. Understanding these nuances is vital for crafting effective policies tailored to the unique needs and potentials of diverse populations.</p>
-                <div class="divider"></div>
+                <p>Does money change how fast a population grows? The data says yes. The chart above shows the "speed limit" of growth for different income groups.</p>
+                <p><strong>Key Insight:</strong> Middle-income countries are growing the fastest. Why? It's often a "sweet spot" where healthcare is improving—saving more lives—but family sizes haven't shrunk yet. In contrast, wealthier nations tend to grow slower as education and career opportunities lead to smaller families. Understanding this helps us tailor support where it's needed most.</p>
             </section>
-            <section id="slide5" class="slide" aria-labelledby="title5">
-                <h2>A Regional Tapestry: Population Shifts Across Continents</h2>
+
+            <section id="slide5" class="slide">
+                <h2>A Global Tapestry: Where We Live</h2>
                 <div id="population-growth-treemap" class="chart-container-loading" aria-label="Treemap visualizing Global Population Distribution and Regional Growth Focus by population numbers"></div>
-                <p>Now, let's zoom out and look at continents with the treemap above. This visualization details how populations are distributed and how they're growing and shifting across the globe. We use a metric called Compound Annual Growth Rate (CAGR) to understand these changes – it tells us the average yearly growth over a period. For example, Sub-Saharan Africa saw the most significant expansion, with the highest population growth rate at <span class="highlight">1.201%</span> annually between 1960 and 2021. This vibrant growth indicates youthful populations and evolving societies. In contrast, North America's growth was more modest, at <span class="highlight">0.029%</span> during the same period. These varying rates have big implications for regional development, influencing urban planning, infrastructure needs, resource allocation, and environmental stewardship on all scales.</p>
-                <div class="divider"></div>
+                <p>Let's zoom out to the continents. This colorful map isn't just shapes; it shows where the human story is unfolding.</p>
+                <p><strong>Sub-Saharan Africa</strong> is seeing the most vibrant growth, driven by a young, dynamic population. Meanwhile, regions like <strong>North America</strong> and <strong>Europe</strong> are growing much more slowly. This shift means the future of the global workforce and innovation will increasingly come from the Global South.</p>
             </section>
-            <section id="slide6" class="slide" aria-labelledby="title6">
-                <h2>Spotlight on Population Giants: A Closer Look</h2>
+
+            <section id="slide6" class="slide">
+                <h2>The Giants: 10 Nations, Billions of Stories</h2>
                 <div id="population-growth-line-chart" class="chart-container-loading" aria-label="Interactive line chart displaying Population Growth of Top 10 Countries, filterable by country"></div>
                 <div>
                     <label for="country-filter">Explore Nations' Journeys:</label>
@@ -107,56 +109,117 @@
                         <option value="Mexico">Mexico</option>
                     </select>
                 </div>
-                <p>The line chart before you isn't just lines; it's a dynamic story of the world's ten most populous countries over decades. You can quickly see how rapidly China and India's populations have surged, outpacing the other eight nations. For much of recent history, China held the top spot. But these numbers represent more than statistics; they're about countless lives, diverse cultures, and the unique demographic tapestries of these influential nations. Beyond these two giants, countries like the Russian Federation, Mexico, Indonesia, Pakistan, Brazil, Nigeria, Bangladesh, and the United States also house substantial global populations. Each faces distinct opportunities and challenges, shaped by its demographic profile and its place in the larger human story.</p>
-                <div class="divider"></div>
+                <p>This chart tracks the journey of the world's ten most populous countries. Watch the lines for <strong>China</strong> and <strong>India</strong>—they are in a league of their own, soaring above the rest.</p>
+                <p>But look closely at the others. Countries like <strong>Nigeria</strong> and <strong>Pakistan</strong> are rising fast. Each line represents a unique culture and economy. As these nations grow, their influence on the global stage grows with them.</p>
             </section>
-            <section id="slide7" class="slide" aria-labelledby="title7">
-                <h2>Pathways to a Balanced Future: Key Recommendations</h2>
-                <p>Wisely navigating global population dynamics is a shared human endeavor. A balanced future relies on two main pillars: empowering people with knowledge and agency, and fostering practices for our planet's long-term sustainability. A cornerstone is ensuring <span class="highlight">equitable education for all girls and women</span> globally. This isn't just social justice; it's a powerful catalyst for demographic stability. Research, like Pradhan's (2015) from the World Bank, clearly shows a strong link between women's education and fertility rates. When girls stay in school longer, it often leads to later marriages, better access to family planning info, and more agency in decisions about their lives and families. These individual empowerments contribute to more sustainable population patterns.</p>
-                <p>Beyond education, understanding our <span class="highlight">collective consumption patterns and their impact on Earth’s finite resources</span> is crucial. We need to encourage mindful consumption and develop strategies for equitable resource distribution. This isn't about drastic restrictions but championing smart, sustainable choices at all levels. For instance, rethinking how we use and share resources can reduce waste, lessen our ecological footprint, and ensure resources remain for future generations.</p>
-                <blockquote><p>“Empowering communities with knowledge about sustainable living, and a deep appreciation for preserving our planet’s natural wealth, can pave the way for a more resilient, equitable, and harmonious world.”</p></blockquote>
-                <p>Furthermore, a strong emphasis on <span class="highlight">comprehensive resource conservation</span> and reducing our ecological footprint is vital. This requires a multi-pronged approach: raising public awareness, promoting sustainable technologies, and supporting policies for responsible resource use. Every effort towards sustainable consumption contributes to a larger positive change for our planet and its people.</p>
-                <div class="divider"></div>
+
+            <section id="slide7" class="slide">
+                <h2>Building a Better Future: What Can We Do?</h2>
+                <p>Navigating our future isn't just about government rules; it's about empowering people. Two powerful keys can unlock a balanced world:</p>
+                <div class="feature-block">
+                    <div class="feature-item">
+                        <div class="icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="feature-text">
+                            <strong>1. Education for Her:</strong>
+                            <p>When girls and women have access to quality education, everything changes. They gain the power to make their own choices about their lives and families. Studies show that educated women often choose to have smaller, healthier families, creating a ripple effect of prosperity.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-wrapper"><i class="fas fa-leaf"></i></div>
+                        <div class="feature-text">
+                            <strong>2. Mindful Living:</strong>
+                            <p>It's not just about how <em>many</em> of us there are, but how <em>much</em> we use. By choosing sustainable habits—like reducing waste and sharing resources—we can ensure there's enough for everyone. It's about living smarter, not just with less.</p>
+                        </div>
+                    </div>
+                </div>
+                <blockquote><p>“Empowering communities with knowledge and a love for our planet paves the way for a world where everyone can thrive.”</p></blockquote>
             </section>
-            <section id="slide8" class="slide" aria-labelledby="title8">
-                <h2>The Interconnected Web: Population Growth and Our Natural World</h2>
-                <p>It's simple: a growing global family means increased demand for essentials – food, water, and energy. If not managed carefully, this can lead to over-extraction and depletion of natural resources, straining ecosystems. This section explores these critical connections and highlights the importance of proactive strategies.</p>
-                <ul>
-                    <li><strong>Water for All: A Precious, Scarce Resource:</strong> Freshwater is finite. As populations and cities grow, demand for water intensifies, leading to scarcity in many regions. Smart water management, investment in efficient technologies, and promoting water conservation are vital for water security.</li>
-                    <li><strong>Nourishing the World Sustainably: The Future of Food:</strong> More people mean more food needed, but sustainably. Current farming practices can degrade the environment. We must embrace sustainable agriculture (like agroecology), reduce food waste, and support resilient local food systems.</li>
-                    <li><strong>Powering Our Future: The Clean Energy Imperative:</strong> Energy needs expand with population growth. Reliance on fossil fuels drives climate change and pollution. A decisive shift to renewable energy (solar, wind, geothermal) is essential for a cleaner future.</li>
-                    <li><strong>Protecting Biodiversity: Safeguarding Life's Richness:</strong> Human expansion can lead to habitat loss, driving the biodiversity crisis. Biodiversity is crucial for ecosystem health and services like pollination and clean water. Robust conservation, protected areas, and sustainable land-use planning are critical.</li>
-                </ul>
-                <p>Consider Singapore's innovative water management. Facing limited freshwater, they invested in water recycling (NEWater) and desalination, becoming a global leader. This shows how visionary policy, technology, and public education can create a sustainable water supply, offering lessons worldwide.</p>
-                <div class="divider"></div>
+
+            <section id="slide8" class="slide">
+                <h2>Our Shared Home: The Resource Challenge</h2>
+                <p>More people means we need more food, water, and energy. It's a simple equation with a complex solution. Here is how we can protect our essentials:</p>
+                <div class="grid-list">
+                    <div class="grid-item">
+                        <i class="fas fa-tint grid-icon"></i>
+                        <h3>Water</h3>
+                        <p>It's precious. We need to treat every drop like gold, using technology to recycle and conserve it.</p>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-utensils grid-icon"></i>
+                        <h3>Food</h3>
+                        <p>We need to grow food in ways that heal the soil, not harm it. Reducing food waste is also a huge, easy win.</p>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-solar-panel grid-icon"></i>
+                        <h3>Energy</h3>
+                        <p>The sun and wind are free. Shifting to clean energy stops pollution and powers our future sustainably.</p>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-tree grid-icon"></i>
+                        <h3>Nature</h3>
+                        <p>We share this planet with millions of other species. Protecting their homes protects ours, too.</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem;">Look at <strong>Singapore</strong>: A small island with little water became a global leader in recycling it. It proves that with creativity, we can overcome scarcity.</p>
             </section>
-            <section id="slide9" class="slide" aria-labelledby="title9">
-                <h2>Learning from Global Experiences: Success Stories in Sustainable Population Management</h2>
-                <p>Looking at how different countries have approached their population dynamics offers valuable lessons. This isn't about "population control," but creating conditions where people can make informed choices about family size, balancing national development with environmental health. Here are a few examples:</p>
-                <ul>
-                    <li><strong>China: A Complex Transition:</strong> The one-child policy slowed population growth but led to demographic imbalances like an aging population and skewed gender ratios. China is now addressing these with new policies.</li>
-                    <li><strong>India: States Leading the Way:</strong> Various states in India have seen positive results by focusing on female education, family planning access, and women's empowerment, leading to voluntary reductions in birth rates.</li>
-                    <li><strong>Bangladesh: A Beacon of Progress:</strong> This nation made remarkable progress in lowering its fertility rate through improved education (especially for girls), better healthcare, and effective community-based family planning programs.</li>
-                    <li><strong>Rwanda: Rebuilding and Planning:</strong> Post-conflict, Rwanda integrated family planning into its healthcare, emphasized gender equality, and focused on economic development, helping create conditions for smaller family sizes as a voluntary choice.</li>
-                </ul>
-                <p>Bangladesh's story is particularly inspiring. Community health workers, many local women, brought family planning info and services directly to people, overcoming barriers and leading to a significant, voluntary decline in fertility rates.</p>
-                <blockquote><p>“Bangladesh’s journey shows how community engagement, better health and education, and empowering individuals, especially women, can lead to positive demographic shifts.”</p></blockquote>
-                <p>These examples highlight the importance of context-specific, voluntary, rights-based approaches to population and development, prioritizing health, education, and empowerment.</p>
-                <div class="divider"></div>
+
+            <section id="slide9" class="slide">
+                <h2>Success Stories: Learning from Each Other</h2>
+                <p>History is full of lessons. Here is how different nations have managed their growth:</p>
+                <div class="feature-block">
+                    <div class="feature-item">
+                        <div class="icon-wrapper"><i class="fas fa-flag"></i></div>
+                        <div class="feature-text">
+                            <strong>Bangladesh:</strong>
+                            <p>A shining example. By sending health workers—mostly women—directly into villages, they empowered families with knowledge and care. The result? Healthier, smaller families and a booming economy.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-wrapper"><i class="fas fa-dove"></i></div>
+                        <div class="feature-text">
+                            <strong>Rwanda:</strong>
+                            <p>After tragedy, they rebuilt by focusing on gender equality and health. Today, it's a model of how development and family planning go hand in hand.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
+                        <div class="feature-text">
+                            <strong>India:</strong>
+                            <p>Many states are showing that when you invest in girls' education, population growth slows down naturally, without force.</p>
+                        </div>
+                    </div>
+                </div>
+                <blockquote><p>“Bangladesh shows us that when you trust and empower local communities, especially women, incredible change happens.”</p></blockquote>
             </section>
-            <section id="slide10" class="slide" aria-labelledby="title10">
-                <h2>Navigating the Path Ahead: Future Trends and Shared Challenges</h2>
-                <p>Our global community is at a juncture of demographic shifts and interconnected challenges. Understanding these trends is key to building resilient, equitable, and sustainable societies. Let's explore some defining currents:</p>
-                <ul>
-                    <li><strong>The Rise of Cities (Urbanization):</strong> More people are moving to urban centers, bringing talent and opportunities but also straining infrastructure, housing, public services, and the environment.</li>
-                    <li><strong>The Silver Wave: Aging Populations:</strong> Many nations are seeing aging populations due to lower birth rates and longer lives. This brings challenges for healthcare, social support, and economies, requiring innovative responses.</li>
-                    <li><strong>Our Planet, Our Responsibility: Climate Change:</strong> Population size and consumption patterns are linked to climate change. A larger population can mean greater resource use and emissions, making sustainable development and green tech crucial.</li>
-                    <li><strong>The Pursuit of Equity and Justice:</strong> Ensuring everyone has access to opportunities, healthcare, education, and a safe environment remains a global challenge. Population dynamics can amplify inequalities if not addressed with inclusive policies.</li>
-                </ul>
-                <p>Tokyo, Japan, offers a vivid example of a megacity grappling with urbanization and a rapidly aging population. They're exploring solutions like compact, transit-oriented development and enhanced senior healthcare, offering insights for other cities.</p>
-                <div class="divider"></div>
+
+            <section id="slide10" class="slide">
+                <h2>The Road Ahead: Trends to Watch</h2>
+                <p>As we look to the horizon, four major trends will shape our lives:</p>
+                <div class="grid-list">
+                    <div class="grid-item">
+                        <i class="fas fa-city grid-icon"></i>
+                        <h3>Urban Life</h3>
+                        <p>We are becoming a species of city-dwellers. Cities are hubs of opportunity but need to be built for people, not just cars.</p>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-user-clock grid-icon"></i>
+                        <h3>Aging Gracefully</h3>
+                        <p>We are living longer! This is a triumph, but it means we need to rethink how we care for our elders and keep them connected.</p>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-globe-americas grid-icon"></i>
+                        <h3>Climate Action</h3>
+                        <p>Our numbers and our habits drive climate change. Green technology and sustainable living are no longer optional—they are survival skills.</p>
+                    </div>
+                    <div class="grid-item">
+                        <i class="fas fa-balance-scale grid-icon"></i>
+                        <h3>Fairness for All</h3>
+                        <p>We must ensure that the benefits of progress reach everyone, not just the lucky few.</p>
+                    </div>
+                </div>
             </section>
-            <section id="slide11" class="slide" aria-labelledby="title11">
+
+                        <section id="slide11" class="slide">
                 <h2>Foundations of Knowledge: Sources & Further Reading</h2>
                 <p>The insights here build on work by researchers and international organizations. To dive deeper into global population dynamics, consumption, and projections, these resources offer a wealth of information:</p>
                 <ul>
@@ -168,51 +231,51 @@
                     <li>Pradhan, E. (n.d.). Female Education and Childbearing: A Closer Look at the Data. Retrieved November 28, 2022, from <a href="https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data" target="_blank" rel="noopener noreferrer">https://blogs.worldbank.org/health/female-education-and-childbearing-closer-look-data</a></li>
                     <li>Roser, M., & Rodés-Guirao, L. (2013). Future Population Growth. Our World in Data. <a href="https://ourworldindata.org/future-population-growth" target="_blank" rel="noopener noreferrer">https://ourworldindata.org/future-population-growth</a></li>
                 </ul>
-                <div class="divider"></div>
             </section>
-            <section id="slide12" class="slide" aria-labelledby="title12">
-                <h2>Concluding Reflections: Charting a Sustainable Course Together</h2>
-                <p>Global population growth is a complex story of challenges and opportunities. As we've seen, managing this journey wisely is about people – their lives, well-being, aspirations – and the health of our planet. By focusing on empowering individuals (especially women and girls) through education, ensuring healthcare access (including family planning), championing sustainable resource management, and fostering equitable development, we can work towards a future where humanity and nature thrive together. The insights here are a starting point for discussion and action, highlighting the power of informed policies, community action, and global cooperation. The future we build depends on the conscious, collaborative choices we make today.</p>
-                <div class="divider"></div>
-            </section>
-            <section id="slide13" class="slide" aria-labelledby="title13">
-                <h2>Behind the Scenes: Tools & Methods</h2>
-                <p>Bringing this data story to life required credible data sources and modern digital tools, chosen for clarity, accuracy, and an engaging interactive experience. Here’s a look at what shaped this presentation:</p>
+
+            <section id="slide12" class="slide">
+                <h2>Behind the Scenes: How This Works</h2>
+                <p>Curious about the magic behind this website? It's built with three simple but powerful tools, like the bricks, paint, and electricity of a house:</p>
                 <ul>
-                    <li><strong>The Foundation (HTML, CSS, JavaScript):</strong> HTML structured the content, CSS handled the visual style and layout, and JavaScript enabled interactive slideshow features and navigation.</li>
-                    <li><strong>Interactive Visualizations (Plotly.js):</strong> This JavaScript library created the interactive charts and treemaps, allowing for features like hover-over details and filtering, to help you explore population trends more directly.</li>
-                    <li><strong>Initial Data Exploration (Tableau):</strong> Tableau was key for initial in-depth analysis and visualization, helping identify patterns and compelling stories in the raw data that informed this brief.</li>
-                    <li><strong>Data Wrangling (Pandas and Seaborn in Python):</strong> Python libraries like Pandas (for data manipulation) and Seaborn (for statistical visualization) were invaluable for preparing, cleaning, and analyzing datasets.</li>
-                    <li><strong>Credible Data Sources (World Bank, United Nations):</strong> Population statistics and projections are drawn from globally recognized organizations like the World Bank and the United Nations, ensuring reliable information.</li>
+                    <li><strong>HTML (The Skeleton):</strong> This gives the website its structure—the headlines, paragraphs, and sections you're reading right now.</li>
+                    <li><strong>CSS (The Style):</strong> This makes it look good. It handles the colors, fonts, and the layout that lets you scroll smoothly through the story.</li>
+                    <li><strong>JavaScript (The Brains):</strong> This adds the interactivity. It powers the charts that move when you hover over them and highlights the menu as you scroll.</li>
                 </ul>
-                <p>The goal was to transform complex global population data into a narrative that's clear, accessible, and thought-provoking, hoping to foster deeper understanding and encourage further exploration.</p>
-                <div class="divider"></div>
+                <p>We also use a special tool called <strong>Plotly.js</strong> to draw the colorful charts. It takes raw numbers and turns them into the pictures that make the data easy to understand.</p>
+                <p>Want to see the code? You can check it out on <a href="https://github.com/yourusername/global-population-insights" target="_blank">GitHub</a>.</p>
             </section>
-            <section id="slide14" class="slide" aria-labelledby="title14">
-                <h2>Thank You for Exploring!</h2>
-                <p>Thank you for taking the time to explore these insights into global population dynamics. I hope this interactive presentation was informative and sparked new thoughts or questions. If you'd like to discuss any aspect further, please don't hesitate to reach out. Open dialogue is key to understanding and addressing the important global topics that shape our shared future. Your curiosity and engagement are truly valued.</p>
-                <p>Connect with me on <a href="https://www.linkedin.com/in/tobin-zolkowski-844873200/" target="_blank" rel="noopener noreferrer">LinkedIn</a> or reach out via my <a href="https://tobin-data-portfolio.netlify.app/" target="_blank" rel="noopener noreferrer">Contact Form</a>.</p>
+
+            <section id="slide13" class="slide">
+                <h2>Let's Keep the Conversation Going</h2>
+                <p>Thank you for exploring this story with me! I hope it sparked some new ideas about our world.</p>
+                
+                <div class="share-section">
+                    <p><strong>Share this story:</strong></p>
+                    <div class="share-buttons">
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tzolkowski96.github.io/global-population-insights/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20interactive%20story%20on%20Global%20Population%20Growth!&url=https://tzolkowski96.github.io/global-population-insights/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="mailto:?subject=Global Population Insights&body=Check out this interactive story: https://tzolkowski96.github.io/global-population-insights/" class="share-btn email"><i class="fas fa-envelope"></i> Email</a>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2rem;">If you have questions or just want to say hi, I'd love to hear from you.</p>
+                <p>
+                    <a href="https://www.linkedin.com/in/tobin-zolkowski-844873200/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; margin-right: 15px;">
+                        <button style="padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px;"><i class="fab fa-linkedin"></i> Connect on LinkedIn</button>
+                    </a>
+                    <a href="https://tobin-data-portfolio.netlify.app/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                        <button style="padding: 10px 20px; cursor: pointer; background-color: #28a745; color: white; border: none; border-radius: 5px;"><i class="fas fa-briefcase"></i> View My Portfolio</button>
+                    </a>
+                </p>
             </section>
         </main>
-        <div class="nav container" role="navigation" aria-label="Slide Controls">
-            <button onclick="previousSlide()">← Previous</button>
-            <button onclick="nextSlide()">Next →</button>
-        </div>
-    </div>
-    <footer>
-        <div class="container">
-            <p>Originally Published: Fall 2022. Last Updated: <time itemprop="dateModified" datetime="2025-07-01">July 1, 2025</time>.</p>
+
+        <footer>
+            <p>Created with ❤️ to help everyone understand our changing world. Data sources: World Bank & UN.</p>
             <p>&copy; 2022-2025 Tobin Zolkowski. All rights reserved.</p>
-        </div>
-        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style="display:none;">
-            <meta itemprop="name" content="Tobin Zolkowski">
-            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-                <meta itemprop="url" content="https://tzolkowski96.github.io/global-population-insights/preview-image.svg">
-                <meta itemprop="width" content="600">
-                <meta itemprop="height" content="60">
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
